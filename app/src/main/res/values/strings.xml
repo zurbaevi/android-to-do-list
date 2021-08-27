@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">To Do List</string>
+    <string name="fab_content_description_add_new_task">Add New Task</string>
+    <string name="fragment_add_add">Add</string>
+    <string name="fragment_add_enter_task">Enter Task</string>
+    <string name="fragment_add_add_task">Add Task</string>
+    <string name="content_description_icon_time">Icon time</string>
+    <string name="content_description_icon_more">Icon more</string>
+    <string name="fragment_add_update">Update</string>
+    <string name="fragment_update_update_task">Update Task</string>
+    <string name="fragment_update_enter_task">Enter Task</string>
+    <string name="menu_search">Search</string>
+</resources>

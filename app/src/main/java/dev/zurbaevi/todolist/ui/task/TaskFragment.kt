@@ -1,0 +1,97 @@
+package dev.zurbaevi.todolist.ui.task
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import dev.zurbaevi.todolist.database.TaskEntry
+import dev.zurbaevi.todolist.databinding.FragmentTaskBinding
+import dev.zurbaevi.todolist.util.extensions.setOnSingleClickListener
+import dev.zurbaevi.todolist.util.getCurrentDate
+import dev.zurbaevi.todolist.viewmodel.TaskViewModel
+
+class TaskFragment : Fragment() {
+
+    private lateinit var binding: FragmentTaskBinding
+
+    private val viewModel: TaskViewModel by viewModels()
+    private lateinit var adapter: TaskAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentTaskBinding.inflate(inflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+
+        adapter = TaskAdapter()
+        adapter.setOnItemClickListener(object : TaskAdapter.OnItemClickListener {
+            override fun onItemClick(taskEntry: TaskEntry) {
+                findNavController().navigate(
+                    TaskFragmentDirections.actionTaskFragmentToUpdateTaskBottomSheetDialogFragment(
+                        taskEntry
+                    )
+                )
+            }
+        })
+
+        binding.textTodayTitle.text = getCurrentDate(requireContext().applicationContext)
+
+        viewModel.getAllTasks.observe(viewLifecycleOwner, {
+            adapter.submitList(it)
+        })
+
+        viewModel.getAllTasksCount.observe(viewLifecycleOwner, {
+            binding.textTaskCount.text = String.format("$it tasks")
+        })
+
+        binding.apply {
+
+            binding.recyclerView.adapter = adapter
+
+            floatingActionBar.setOnSingleClickListener {
+                findNavController().navigate(TaskFragmentDirections.actionTaskFragmentToAddTaskBottomSheetDialogFragment())
+            }
+        }
+
+        ItemTouchHelper(object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val taskEntry = adapter.currentList[position]
+                viewModel.delete(taskEntry)
+
+                Snackbar.make(binding.root, "Deleted!", Snackbar.LENGTH_SHORT).apply {
+                    setAction("Undo") {
+                        viewModel.insert(taskEntry)
+                    }
+                    show()
+                }
+            }
+
+        }).attachToRecyclerView(binding.recyclerView)
+
+        setHasOptionsMenu(true)
+    }
+}

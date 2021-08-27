@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/taskFragment">
+
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="dev.zurbaevi.todolist.ui.task.TaskFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_task">
+        <action
+            android:id="@+id/action_taskFragment_to_addTaskBottomSheetDialogFragment"
+            app:destination="@id/addTaskBottomSheetDialogFragment" />
+        <action
+            android:id="@+id/action_taskFragment_to_updateTaskBottomSheetDialogFragment"
+            app:destination="@id/updateTaskBottomSheetDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/addTaskBottomSheetDialogFragment"
+        android:name="dev.zurbaevi.todolist.ui.add.AddTaskBottomSheetDialogFragment"
+        tools:layout="@layout/fragment_add_task_bottom_sheet_dialog">
+        <action
+            android:id="@+id/action_addTaskBottomSheetDialogFragment_to_taskFragment"
+            app:destination="@id/taskFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/updateTaskBottomSheetDialogFragment"
+        android:name="dev.zurbaevi.todolist.ui.update.UpdateTaskBottomSheetDialogFragment"
+        tools:layout="@layout/fragment_update_task_bottom_sheet_dialog">
+        <action
+            android:id="@+id/action_updateTaskBottomSheetDialogFragment_to_taskFragment"
+            app:destination="@id/taskFragment" />
+        <argument
+            android:name="taskEntry"
+            app:argType="dev.zurbaevi.todolist.database.TaskEntry" />
+    </dialog>
+</navigation>
