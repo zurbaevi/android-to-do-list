@@ -6,7 +6,7 @@ ____
 
 ## Screenshots:
 
-<img src="pic/device_screen_4.png" width="300" height="500" alt="lorem"> <img src="pic/device_screen_3.png" width="300" height="500" alt="lorem">  <img src="pic/device_screen_2.png" width="300" height="500" alt="lorem"> <img src="pic/device_screen_1.png" width="300" height="500" alt="lorem">
+<img src="pic/device_screen_4.png" width="400" height="600" alt="lorem"> <img src="pic/device_screen_3.png" width="400" height="600" alt="lorem">  <img src="pic/device_screen_2.png" width="400" height="600" alt="lorem"> <img src="pic/device_screen_1.png" width="400" height="600" alt="lorem">
 
 ____
 
