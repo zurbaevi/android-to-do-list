@@ -6,8 +6,7 @@ ____
 
 ## Screenshots:
 
-- ![4](pic/device_screen_3.png) - ![4](pic/device_screen_2.png) 
-- ![2](pic/device_screen_4.png) - ![1](pic/device_screen_1.png)
+<img src="pic/device_screen_4.png" width="240" height="500" alt="lorem"> <img src="pic/device_screen_3.png" width="240" height="500" alt="lorem">  <img src="pic/device_screen_2.png" width="240" height="500" alt="lorem"> <img src="pic/device_screen_1.png" width="240" height="500" alt="lorem">
 
 ____
 
