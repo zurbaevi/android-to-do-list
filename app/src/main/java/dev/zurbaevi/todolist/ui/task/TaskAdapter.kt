@@ -20,7 +20,6 @@ class TaskAdapter : ListAdapter<TaskEntry, TaskAdapter.ViewHolder>(TaskDiffCallb
         this.clickListener = clickListener
     }
 
-
     object TaskDiffCallback : DiffUtil.ItemCallback<TaskEntry>() {
         override fun areItemsTheSame(oldItem: TaskEntry, newItem: TaskEntry) =
             oldItem.id == newItem.id

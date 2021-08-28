@@ -3,6 +3,7 @@ package dev.zurbaevi.todolist.ui.add
 import android.app.Dialog
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +15,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dev.zurbaevi.todolist.database.TaskEntry
 import dev.zurbaevi.todolist.databinding.FragmentAddTaskBottomSheetDialogBinding
+import dev.zurbaevi.todolist.util.safeNavigate
 import dev.zurbaevi.todolist.viewmodel.TaskViewModel
 
 class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
-
-    private lateinit var binding: FragmentAddTaskBottomSheetDialogBinding
 
     private val viewModel: TaskViewModel by viewModels()
 
@@ -26,12 +26,8 @@ class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAddTaskBottomSheetDialogBinding.inflate(inflater)
-        return binding.root
-    }
+        val binding = FragmentAddTaskBottomSheetDialogBinding.inflate(inflater)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         binding.apply {
             buttonFragmentAddTaskAdd.setOnClickListener {
                 if (TextUtils.isEmpty(editFragmentAddEnterTask.text)) {
@@ -47,9 +43,10 @@ class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
                 viewModel.insert(taskEntry)
                 Toast.makeText(requireContext(), "Added!", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(AddTaskBottomSheetDialogFragmentDirections.actionAddTaskBottomSheetDialogFragmentToTaskFragment())
             }
         }
+
+        return binding.root
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

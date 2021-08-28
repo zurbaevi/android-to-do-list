@@ -1,6 +1,7 @@
 package dev.zurbaevi.todolist.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dev.zurbaevi.todolist.database.TaskDatabase
@@ -16,7 +17,6 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
 
     val getAllTasks = taskRepository.getAllTasks()
     val getAllTasksCount = taskRepository.getAllTasksCount()
-
 
     fun insert(taskEntry: TaskEntry) {
         viewModelScope.launch(Dispatchers.IO) {

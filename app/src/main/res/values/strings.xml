@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">To Do List</string>
+    <string name="app_name">To Do</string>
     <string name="fab_content_description_add_new_task">Add New Task</string>
     <string name="fragment_add_add">Add</string>
     <string name="fragment_add_enter_task">Enter Task</string>

@@ -1,12 +1,15 @@
 package dev.zurbaevi.todolist.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import dev.zurbaevi.todolist.database.TaskDao
 import dev.zurbaevi.todolist.database.TaskEntry
 
 class TaskRepository(private val taskDao: TaskDao) {
 
-    suspend fun insert(taskEntry: TaskEntry) = taskDao.insert(taskEntry)
+    suspend fun insert(taskEntry: TaskEntry) {
+        taskDao.insert(taskEntry)
+    }
 
     suspend fun update(taskEntry: TaskEntry) = taskDao.update(taskEntry)
 

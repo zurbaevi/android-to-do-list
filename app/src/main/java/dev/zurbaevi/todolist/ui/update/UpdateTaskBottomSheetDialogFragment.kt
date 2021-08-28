@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -18,20 +17,13 @@ import dev.zurbaevi.todolist.viewmodel.TaskViewModel
 
 class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
-    private lateinit var binding: FragmentUpdateTaskBottomSheetDialogBinding
-
     private val viewModel: TaskViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentUpdateTaskBottomSheetDialogBinding.inflate(inflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val binding = FragmentUpdateTaskBottomSheetDialogBinding.inflate(inflater)
 
         val args = UpdateTaskBottomSheetDialogFragmentArgs.fromBundle(requireArguments())
 
@@ -54,8 +46,9 @@ class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
                 viewModel.update(taskEntry)
                 Toast.makeText(requireContext(), "Updated!", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(UpdateTaskBottomSheetDialogFragmentDirections.actionUpdateTaskBottomSheetDialogFragmentToTaskFragment())
             }
+
+            return binding.root
         }
     }
 
