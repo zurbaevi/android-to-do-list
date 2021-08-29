@@ -1,6 +1,5 @@
 package dev.zurbaevi.todolist.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import dev.zurbaevi.todolist.database.TaskDao
 import dev.zurbaevi.todolist.database.TaskEntry

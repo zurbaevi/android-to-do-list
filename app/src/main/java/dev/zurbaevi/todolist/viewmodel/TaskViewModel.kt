@@ -1,7 +1,6 @@
 package dev.zurbaevi.todolist.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dev.zurbaevi.todolist.database.TaskDatabase
