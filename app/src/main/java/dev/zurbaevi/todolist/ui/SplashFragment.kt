@@ -5,30 +5,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import dev.zurbaevi.todolist.R
+import dev.zurbaevi.todolist.databinding.FragmentSplashBinding
 import dev.zurbaevi.todolist.util.safeNavigate
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
+import dev.zurbaevi.todolist.viewmodel.SplashViewModel
 
-class SplashFragment : Fragment(), CoroutineScope {
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + Job()
+class SplashFragment : Fragment() {
+
+    private val splashViewModel: SplashViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_splash, container, false)
+    ): View {
+        val binding = FragmentSplashBinding.inflate(layoutInflater)
+
+        observeSplashLiveData()
+
+        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        launch {
-            delay(3000)
-            withContext(Dispatchers.Main) {
-                findNavController().safeNavigate(SplashFragmentDirections.actionSplashFragmentToTaskFragment())
-            }
-        }
+    private fun observeSplashLiveData() {
+        splashViewModel.initSplashScreen()
+        splashViewModel.liveData.observe(viewLifecycleOwner, {
+            findNavController().safeNavigate(SplashFragmentDirections.actionSplashFragmentToTaskFragment())
+        })
     }
 }
