@@ -40,7 +40,7 @@ class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
                 val taskEntry = TaskEntry(
                     args.taskEntry.id,
-                    args.taskEntry.title,
+                    editFragmentUpdateEnterTask.text.toString(),
                     args.taskEntry.timestamp
                 )
 
