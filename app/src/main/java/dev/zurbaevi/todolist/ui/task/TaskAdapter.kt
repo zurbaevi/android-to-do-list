@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dev.zurbaevi.todolist.database.TaskEntry
 import dev.zurbaevi.todolist.databinding.RowLayoutBinding
+import java.text.DateFormat
 
 class TaskAdapter : ListAdapter<TaskEntry, TaskAdapter.ViewHolder>(TaskDiffCallback) {
 
@@ -27,13 +28,15 @@ class TaskAdapter : ListAdapter<TaskEntry, TaskAdapter.ViewHolder>(TaskDiffCallb
         override fun areContentsTheSame(oldItem: TaskEntry, newItem: TaskEntry) = oldItem == newItem
     }
 
-    class ViewHolder(private val binding: RowLayoutBinding) :
+    inner class ViewHolder(private val binding: RowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun binding(taskEntry: TaskEntry, clickListener: OnItemClickListener) {
-            binding.taskEntry = taskEntry
-            binding.clickListener = clickListener
-            binding.executePendingBindings()
+            binding.textRowLayoutTaskTitle.text = taskEntry.title
+            binding.textRowLayoutTime.text = DateFormat.getInstance().format(taskEntry.timestamp)
+            itemView.setOnClickListener {
+                clickListener.onItemClick(taskEntry)
+            }
         }
     }
 

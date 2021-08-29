@@ -18,6 +18,9 @@ import dev.zurbaevi.todolist.viewmodel.TaskViewModel
 
 class TaskFragment : Fragment() {
 
+    private var _binding: FragmentTaskBinding? = null
+    private val binding get() = _binding!!
+
     private val viewModel: TaskViewModel by viewModels()
 
     private lateinit var adapter: TaskAdapter
@@ -26,10 +29,7 @@ class TaskFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentTaskBinding.inflate(inflater)
-
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        _binding = FragmentTaskBinding.inflate(inflater, container, false)
 
         adapter = TaskAdapter()
         adapter.setOnItemClickListener(object : TaskAdapter.OnItemClickListener {
@@ -89,5 +89,10 @@ class TaskFragment : Fragment() {
         setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

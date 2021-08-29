@@ -13,6 +13,9 @@ import dev.zurbaevi.todolist.viewmodel.SplashViewModel
 
 class SplashFragment : Fragment() {
 
+    private var _binding: FragmentSplashBinding? = null
+    private val binding get() = _binding!!
+
     private val splashViewModel: SplashViewModel by viewModels()
 
     override fun onCreateView(
@@ -20,7 +23,7 @@ class SplashFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentSplashBinding.inflate(layoutInflater)
+        _binding = FragmentSplashBinding.inflate(inflater, container, false)
 
         observeSplashLiveData()
 
@@ -32,5 +35,10 @@ class SplashFragment : Fragment() {
         splashViewModel.liveData.observe(viewLifecycleOwner, {
             findNavController().safeNavigate(SplashFragmentDirections.actionSplashFragmentToTaskFragment())
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

@@ -17,13 +17,16 @@ import dev.zurbaevi.todolist.viewmodel.TaskViewModel
 
 class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
+    private var _binding: FragmentAddTaskBottomSheetDialogBinding? = null
+    private val binding get() = _binding!!
+
     private val viewModel: TaskViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentAddTaskBottomSheetDialogBinding.inflate(inflater)
+        _binding = FragmentAddTaskBottomSheetDialogBinding.inflate(inflater, container, false)
 
         binding.apply {
             buttonFragmentAddTaskAdd.setOnClickListener {
@@ -50,5 +53,10 @@ class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
         val dialog = BottomSheetDialog(requireContext(), theme)
         dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         return dialog
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

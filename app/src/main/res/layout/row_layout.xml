@@ -1,83 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="#F3F3F3"
+    app:cardElevation="4dp">
 
-    <data>
-
-        <variable
-            name="taskEntry"
-            type="dev.zurbaevi.todolist.database.TaskEntry" />
-
-        <variable
-            name="clickListener"
-            type="dev.zurbaevi.todolist.ui.task.TaskAdapter.OnItemClickListener" />
-    </data>
-
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:onClick="@{() -> clickListener.onItemClick(taskEntry)}"
-        app:cardBackgroundColor="#F3F3F3"
-        app:cardElevation="4dp">
+        android:padding="15dp">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/text_row_layout_task_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/image_row_layout_more"
+            android:fontFamily="@font/didact_gothic"
+            android:maxLines="3"
+            android:textColor="@android:color/holo_green_dark"
+            android:textStyle="bold"
+            tools:ignore="RelativeOverlap"
+            tools:text="@tools:sample/lorem" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp">
-
-            <TextView
-                android:id="@+id/text_row_layout_task_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_toStartOf="@id/image_row_layout_more"
-                android:fontFamily="@font/didact_gothic"
-                android:maxLines="3"
-                android:text="@{taskEntry.title}"
-                android:textColor="@android:color/holo_green_dark"
-                android:textStyle="bold"
-                tools:ignore="RelativeOverlap"
-                tools:text="@tools:sample/lorem" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/text_row_layout_task_title"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                tools:ignore="UseCompoundDrawables">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/content_description_icon_time"
-                    android:src="@drawable/ic_time"
-                    tools:ignore="ImageContrastCheck" />
-
-                <TextView
-                    android:id="@+id/text_row_layout_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:fontFamily="@font/didact_gothic"
-                    app:setTimestamp="@{taskEntry.timestamp}"
-                    tools:text="Time" />
-
-            </LinearLayout>
+            android:layout_below="@id/text_row_layout_task_title"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
-                android:id="@+id/image_row_layout_more"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"
-                android:contentDescription="@string/content_description_icon_more"
-                android:src="@drawable/ic_more"
+                android:contentDescription="@string/content_description_icon_time"
+                android:src="@drawable/ic_time"
                 tools:ignore="ImageContrastCheck" />
 
-        </RelativeLayout>
+            <TextView
+                android:id="@+id/text_row_layout_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/didact_gothic"
+                tools:text="Time" />
 
-    </androidx.cardview.widget.CardView>
-</layout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/image_row_layout_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/content_description_icon_more"
+            android:src="@drawable/ic_more"
+            tools:ignore="ImageContrastCheck" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

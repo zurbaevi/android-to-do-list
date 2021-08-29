@@ -17,17 +17,18 @@ import dev.zurbaevi.todolist.viewmodel.TaskViewModel
 
 class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
+    private var _binding: FragmentUpdateTaskBottomSheetDialogBinding? = null
+    private val binding get() = _binding!!
+
     private val viewModel: TaskViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentUpdateTaskBottomSheetDialogBinding.inflate(inflater)
+        _binding = FragmentUpdateTaskBottomSheetDialogBinding.inflate(inflater, container, false)
 
         val args = UpdateTaskBottomSheetDialogFragmentArgs.fromBundle(requireArguments())
-
-        binding.lifecycleOwner = this
 
         binding.apply {
             editFragmentUpdateEnterTask.setText(args.taskEntry.title)
@@ -56,5 +57,10 @@ class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
         val dialog = BottomSheetDialog(requireContext(), theme)
         dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         return dialog
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
