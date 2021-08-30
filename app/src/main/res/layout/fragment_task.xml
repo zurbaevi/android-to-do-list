@@ -39,6 +39,18 @@
                 tools:ignore="TextContrastCheck"
                 tools:text="21 tasks" />
 
+            <ImageView
+                android:id="@+id/image_delete_all_tasks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/text_today_title"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="24dp"
+                android:clickable="true"
+                android:contentDescription="@string/fragment_task_clear_all_tasks"
+                android:focusable="true"
+                android:src="@drawable/ic_delete" />
+
         </RelativeLayout>
 
         <LinearLayout

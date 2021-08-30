@@ -10,4 +10,5 @@
     <string name="fragment_update_update_task">Update Task</string>
     <string name="fragment_update_enter_task">Enter Task</string>
     <string name="menu_search">Search</string>
+    <string name="fragment_task_clear_all_tasks">Clear all tasks</string>
 </resources>

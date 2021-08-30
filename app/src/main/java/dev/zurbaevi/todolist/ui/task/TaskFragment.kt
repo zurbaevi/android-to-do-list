@@ -1,9 +1,12 @@
 package dev.zurbaevi.todolist.ui.task
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -58,6 +61,20 @@ class TaskFragment : Fragment() {
 
             floatingActionBar.setOnClickListener {
                 findNavController().safeNavigate(TaskFragmentDirections.actionTaskFragmentToAddTaskBottomSheetDialogFragment())
+            }
+
+            imageDeleteAllTasks.setOnClickListener {
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Delete all tasks")
+                    .setMessage("Are you, sure you want to delete all tasks?")
+                    .setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
+                        viewModel.deleteAllTasks()
+                        dialog.dismiss()
+                        Toast.makeText(requireContext(), "Deleted!", Toast.LENGTH_SHORT).show()
+                    }.setNegativeButton("No") { dialog: DialogInterface, _: Int ->
+                        dialog.dismiss()
+                    }
+                    .create().show()
             }
         }
 
