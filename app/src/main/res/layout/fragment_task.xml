@@ -39,18 +39,6 @@
                 tools:ignore="TextContrastCheck"
                 tools:text="21 tasks" />
 
-            <ImageView
-                android:id="@+id/image_delete_all_tasks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/text_today_title"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="24dp"
-                android:clickable="true"
-                android:contentDescription="@string/fragment_task_clear_all_tasks"
-                android:focusable="true"
-                android:src="@drawable/ic_delete" />
-
         </RelativeLayout>
 
         <LinearLayout
@@ -74,17 +62,37 @@
 
     </RelativeLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_action_bar"
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/floating_action_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="28dp"
-        android:backgroundTint="@android:color/holo_green_dark"
-        android:contentDescription="@string/fab_content_description_add_new_task"
-        android:src="@drawable/ic_add"
+        app:fab_addButtonColorNormal="@android:color/holo_green_light"
+        app:fab_addButtonColorPressed="@android:color/holo_green_dark"
+        app:fab_expandDirection="up"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_expand_menu_button_add_delete_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_addButtonColorPressed="@android:color/holo_green_dark"
+            app:fab_colorNormal="@android:color/holo_green_light"
+            app:fab_icon="@drawable/ic_delete"
+            app:fab_size="mini" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_expand_menu_button_add_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_addButtonColorPressed="@android:color/holo_green_dark"
+            app:fab_colorNormal="@android:color/holo_green_light"
+            app:fab_icon="@drawable/ic_add"
+            app:fab_size="mini" />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

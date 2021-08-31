@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.google.android.material.snackbar.Snackbar
 import dev.zurbaevi.todolist.database.TaskEntry
 import dev.zurbaevi.todolist.databinding.FragmentTaskBinding
@@ -59,23 +60,32 @@ class TaskFragment : Fragment() {
 
             binding.recyclerView.adapter = adapter
 
-            floatingActionBar.setOnClickListener {
-                findNavController().safeNavigate(TaskFragmentDirections.actionTaskFragmentToAddTaskBottomSheetDialogFragment())
-            }
-
-            imageDeleteAllTasks.setOnClickListener {
-                AlertDialog.Builder(requireContext())
-                    .setTitle("Delete all tasks")
-                    .setMessage("Are you, sure you want to delete all tasks?")
-                    .setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
-                        viewModel.deleteAllTasks()
-                        dialog.dismiss()
-                        Toast.makeText(requireContext(), "Deleted!", Toast.LENGTH_SHORT).show()
-                    }.setNegativeButton("No") { dialog: DialogInterface, _: Int ->
-                        dialog.dismiss()
+            floatingActionMenu.setOnFloatingActionsMenuUpdateListener(object :
+                FloatingActionsMenu.OnFloatingActionsMenuUpdateListener {
+                override fun onMenuExpanded() {
+                    binding.fabExpandMenuButtonAddTask.setOnClickListener {
+                        findNavController().safeNavigate(TaskFragmentDirections.actionTaskFragmentToAddTaskBottomSheetDialogFragment())
                     }
-                    .create().show()
-            }
+                    binding.fabExpandMenuButtonAddDeleteTask.setOnClickListener {
+                        AlertDialog.Builder(requireContext())
+                            .setTitle("Delete all tasks")
+                            .setMessage("Are you, sure you want to delete all tasks?")
+                            .setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
+                                viewModel.deleteAllTasks()
+                                dialog.dismiss()
+                                Toast.makeText(requireContext(), "Deleted!", Toast.LENGTH_SHORT)
+                                    .show()
+                            }.setNegativeButton("No") { dialog: DialogInterface, _: Int ->
+                                dialog.dismiss()
+                            }
+                            .create().show()
+                    }
+                }
+
+                override fun onMenuCollapsed() {
+                }
+
+            })
         }
 
         ItemTouchHelper(object :
