@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import dev.zurbaevi.todolist.database.TaskDatabase
 import dev.zurbaevi.todolist.database.TaskEntry
 import dev.zurbaevi.todolist.repository.TaskRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TaskViewModel(application: Application) : AndroidViewModel(application) {
@@ -18,25 +17,25 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
     val getAllTasksCount = taskRepository.getAllTasksCount()
 
     fun insert(taskEntry: TaskEntry) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             taskRepository.insert(taskEntry)
         }
     }
 
     fun update(taskEntry: TaskEntry) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             taskRepository.update(taskEntry)
         }
     }
 
     fun delete(taskEntry: TaskEntry) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             taskRepository.delete(taskEntry)
         }
     }
 
     fun deleteAllTasks() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             taskRepository.deleteAllTasks()
         }
     }

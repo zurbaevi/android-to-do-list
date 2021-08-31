@@ -103,8 +103,6 @@ class TaskFragment : Fragment() {
 
         }).attachToRecyclerView(binding.recyclerView)
 
-        setHasOptionsMenu(true)
-
         return binding.root
     }
 
