@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">To Do List</string>
+    <string name="app_name" translatable="false">To Do List</string>
     <string name="fragment_add_add">Add</string>
     <string name="fragment_add_enter_task">Enter Task</string>
     <string name="fragment_add_add_task">Add Task</string>
@@ -11,7 +11,7 @@
     <string name="menu_search">Search</string>
     <string name="fragment_task_clear_all_tasks">Clear all tasks</string>
     <string name="text_empty_list">You don\'t have any tasks</string>
-    <string name="tasks">tasks</string>
+    <string name="tasks">task(s)</string>
     <string name="toast_empty">It\'s empty</string>
     <string name="toast_deleted">Deleted</string>
     <string name="toast_updated">Updated</string>
