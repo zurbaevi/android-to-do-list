@@ -53,7 +53,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@android:color/holo_green_dark"
+            android:background="@color/blue_gray_900"
             android:fontFamily="@font/didact_gothic"
             android:text="@string/fragment_add_update"
             android:textColor="@color/white"

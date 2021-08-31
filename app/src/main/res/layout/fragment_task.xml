@@ -13,7 +13,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:background="@android:color/holo_green_light">
+            android:background="@color/blue_gray_800">
 
             <TextView
                 android:id="@+id/text_today_title"
@@ -35,7 +35,7 @@
                 android:layout_below="@id/text_today_title"
                 android:layout_marginStart="20dp"
                 android:fontFamily="@font/didact_gothic"
-                android:textColor="@android:color/holo_green_dark"
+                android:textColor="@color/white"
                 tools:ignore="TextContrastCheck"
                 tools:text="21 tasks" />
 
@@ -69,8 +69,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="28dp"
-        app:fab_addButtonColorNormal="@android:color/holo_green_light"
-        app:fab_addButtonColorPressed="@android:color/holo_green_dark"
+        app:fab_addButtonColorNormal="@color/blue_gray_800"
+        app:fab_addButtonColorPressed="@color/blue_gray_900"
         app:fab_expandDirection="up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -79,8 +79,8 @@
             android:id="@+id/fab_expand_menu_button_add_delete_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_addButtonColorPressed="@android:color/holo_green_dark"
-            app:fab_colorNormal="@android:color/holo_green_light"
+            app:fab_colorNormal="@color/blue_gray_800"
+            app:fab_colorPressed="@color/blue_gray_900"
             app:fab_icon="@drawable/ic_delete"
             app:fab_size="mini" />
 
@@ -88,8 +88,8 @@
             android:id="@+id/fab_expand_menu_button_add_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_addButtonColorPressed="@android:color/holo_green_dark"
-            app:fab_colorNormal="@android:color/holo_green_light"
+            app:fab_colorNormal="@color/blue_gray_800"
+            app:fab_colorPressed="@color/blue_gray_900"
             app:fab_icon="@drawable/ic_add"
             app:fab_size="mini" />
 
