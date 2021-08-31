@@ -71,6 +71,7 @@ class TaskFragment : Fragment() {
                 override fun onMenuExpanded() {
                     binding.fabExpandMenuButtonAddTask.setOnClickListener {
                         findNavController().safeNavigate(TaskFragmentDirections.actionTaskFragmentToAddTaskBottomSheetDialogFragment())
+                        floatingActionsMenu.collapse()
                     }
                     binding.fabExpandMenuButtonDeleteTask.setOnClickListener {
                         AlertDialog.Builder(requireContext())
@@ -90,6 +91,7 @@ class TaskFragment : Fragment() {
                                 dialog.dismiss()
                             }
                             .create().show()
+                        floatingActionsMenu.collapse()
                     }
                 }
 
