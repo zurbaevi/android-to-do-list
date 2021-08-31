@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.google.android.material.snackbar.Snackbar
+import dev.zurbaevi.todolist.R
 import dev.zurbaevi.todolist.database.TaskEntry
 import dev.zurbaevi.todolist.databinding.FragmentTaskBinding
 import dev.zurbaevi.todolist.util.getCurrentDate
@@ -49,33 +50,43 @@ class TaskFragment : Fragment() {
         binding.textTodayTitle.text = getCurrentDate()
 
         viewModel.getAllTasks.observe(viewLifecycleOwner, {
+            if (it.isEmpty()) {
+                binding.textEmptyList.visibility = View.VISIBLE
+            } else {
+                binding.textEmptyList.visibility = View.GONE
+            }
             adapter.submitList(it)
         })
 
         viewModel.getAllTasksCount.observe(viewLifecycleOwner, {
-            binding.textTaskCount.text = String.format("$it tasks")
+            binding.textTaskCount.text = String.format("$it %s", getString(R.string.tasks))
         })
 
         binding.apply {
 
             binding.recyclerView.adapter = adapter
 
-            floatingActionMenu.setOnFloatingActionsMenuUpdateListener(object :
+            floatingActionsMenu.setOnFloatingActionsMenuUpdateListener(object :
                 FloatingActionsMenu.OnFloatingActionsMenuUpdateListener {
                 override fun onMenuExpanded() {
                     binding.fabExpandMenuButtonAddTask.setOnClickListener {
                         findNavController().safeNavigate(TaskFragmentDirections.actionTaskFragmentToAddTaskBottomSheetDialogFragment())
                     }
-                    binding.fabExpandMenuButtonAddDeleteTask.setOnClickListener {
+                    binding.fabExpandMenuButtonDeleteTask.setOnClickListener {
                         AlertDialog.Builder(requireContext())
-                            .setTitle("Delete all tasks")
-                            .setMessage("Are you, sure you want to delete all tasks?")
-                            .setPositiveButton("Yes") { dialog: DialogInterface, _: Int ->
+                            .setTitle(getString(R.string.alert_dialog_title))
+                            .setMessage(getString(R.string.alert_dialog_message))
+                            .setPositiveButton(getString(R.string.alert_dialog_positive_button)) { dialog: DialogInterface, _: Int ->
                                 viewModel.deleteAllTasks()
                                 dialog.dismiss()
-                                Toast.makeText(requireContext(), "Deleted!", Toast.LENGTH_SHORT)
+                                Toast.makeText(
+                                    requireContext(),
+                                    getString(R.string.toast_deleted),
+                                    Toast.LENGTH_SHORT
+                                )
                                     .show()
-                            }.setNegativeButton("No") { dialog: DialogInterface, _: Int ->
+                            }
+                            .setNegativeButton(getString(R.string.alert_dialog_negative_button)) { dialog: DialogInterface, _: Int ->
                                 dialog.dismiss()
                             }
                             .create().show()
@@ -103,8 +114,12 @@ class TaskFragment : Fragment() {
                 val taskEntry = adapter.currentList[position]
                 viewModel.delete(taskEntry)
 
-                Snackbar.make(binding.root, "Deleted!", Snackbar.LENGTH_SHORT).apply {
-                    setAction("Undo") {
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.toast_deleted),
+                    Snackbar.LENGTH_SHORT
+                ).apply {
+                    setAction(getString(R.string.snackbar_action)) {
                         viewModel.insert(taskEntry)
                     }
                     show()

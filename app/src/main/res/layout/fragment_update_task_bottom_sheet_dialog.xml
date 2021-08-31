@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/text_fragment_update_title"
+            android:id="@+id/textUpdateTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
@@ -26,10 +26,10 @@
             tools:ignore="TextContrastCheck" />
 
         <EditText
-            android:id="@+id/edit_fragment_update_enter_task"
+            android:id="@+id/editUpdateTask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_fragment_update_title"
+            android:layout_below="@id/textUpdateTitle"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="10dp"
             android:backgroundTint="@color/white"
@@ -43,10 +43,10 @@
             tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
         <Button
-            android:id="@+id/button_fragment_update_task_update"
+            android:id="@+id/buttonUpdateTask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/edit_fragment_update_enter_task"
+            android:layout_below="@id/editUpdateTask"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="10dp"
             android:layout_marginStart="10dp"

@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dev.zurbaevi.todolist.R
 import dev.zurbaevi.todolist.database.TaskEntry
 import dev.zurbaevi.todolist.databinding.FragmentUpdateTaskBottomSheetDialogBinding
 import dev.zurbaevi.todolist.viewmodel.TaskViewModel
@@ -31,22 +32,30 @@ class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
         val args = UpdateTaskBottomSheetDialogFragmentArgs.fromBundle(requireArguments())
 
         binding.apply {
-            editFragmentUpdateEnterTask.setText(args.taskEntry.title)
+            editUpdateTask.setText(args.taskEntry.title)
 
-            buttonFragmentUpdateTaskUpdate.setOnClickListener {
-                if (TextUtils.isEmpty(editFragmentUpdateEnterTask.text)) {
-                    Toast.makeText(requireContext(), "It's empty", Toast.LENGTH_SHORT).show()
+            buttonUpdateTask.setOnClickListener {
+                if (TextUtils.isEmpty(editUpdateTask.text)) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.toast_empty),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     return@setOnClickListener
                 }
 
                 val taskEntry = TaskEntry(
                     args.taskEntry.id,
-                    editFragmentUpdateEnterTask.text.toString(),
+                    editUpdateTask.text.toString(),
                     args.taskEntry.timestamp
                 )
 
                 viewModel.update(taskEntry)
-                Toast.makeText(requireContext(), "Updated!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.toast_updated),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
             return binding.root

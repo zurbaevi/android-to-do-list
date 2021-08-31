@@ -6,12 +6,13 @@
     android:background="@color/blue_gray_900"
     tools:context=".ui.SplashFragment">
 
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/content_description_logo"
         android:fontFamily="@font/didact_gothic"
         android:gravity="center"
-        android:text="@string/app_name"
+        android:src="@drawable/logo"
         android:textColor="@color/white"
         android:textSize="60sp" />
 

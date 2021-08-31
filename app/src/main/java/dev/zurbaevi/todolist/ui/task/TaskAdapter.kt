@@ -32,8 +32,8 @@ class TaskAdapter : ListAdapter<TaskEntry, TaskAdapter.ViewHolder>(TaskDiffCallb
         RecyclerView.ViewHolder(binding.root) {
 
         fun binding(taskEntry: TaskEntry, clickListener: OnItemClickListener) {
-            binding.textRowLayoutTaskTitle.text = taskEntry.title
-            binding.textRowLayoutTime.text = DateFormat.getInstance().format(taskEntry.timestamp)
+            binding.textRowTaskTitle.text = taskEntry.title
+            binding.textRowTime.text = DateFormat.getInstance().format(taskEntry.timestamp)
             itemView.setOnClickListener {
                 clickListener.onItemClick(taskEntry)
             }

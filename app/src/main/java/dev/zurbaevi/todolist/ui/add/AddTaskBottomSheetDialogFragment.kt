@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dev.zurbaevi.todolist.R
 import dev.zurbaevi.todolist.database.TaskEntry
 import dev.zurbaevi.todolist.databinding.FragmentAddTaskBottomSheetDialogBinding
 import dev.zurbaevi.todolist.viewmodel.TaskViewModel
@@ -29,20 +30,28 @@ class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
         _binding = FragmentAddTaskBottomSheetDialogBinding.inflate(inflater, container, false)
 
         binding.apply {
-            buttonFragmentAddTaskAdd.setOnClickListener {
-                if (TextUtils.isEmpty(editFragmentAddEnterTask.text)) {
-                    Toast.makeText(requireContext(), "It's empty", Toast.LENGTH_SHORT).show()
+            buttonAddTask.setOnClickListener {
+                if (TextUtils.isEmpty(editAddTitle.text)) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.toast_empty),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     return@setOnClickListener
                 }
 
                 val taskEntry = TaskEntry(
                     0,
-                    editFragmentAddEnterTask.text.toString(),
+                    editAddTitle.text.toString(),
                     System.currentTimeMillis()
                 )
 
                 viewModel.insert(taskEntry)
-                Toast.makeText(requireContext(), "Added!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.toast_added),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
