@@ -44,13 +44,14 @@ class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
                     return@setOnClickListener
                 }
 
-                val taskEntry = TaskEntry(
-                    args.taskEntry.id,
-                    editUpdateTask.text.toString(),
-                    args.taskEntry.timestamp
+                viewModel.update(
+                    TaskEntry(
+                        args.taskEntry.id,
+                        editUpdateTask.text.toString(),
+                        args.taskEntry.timestamp
+                    )
                 )
 
-                viewModel.update(taskEntry)
                 Toast.makeText(
                     requireContext(),
                     getString(R.string.toast_updated),
