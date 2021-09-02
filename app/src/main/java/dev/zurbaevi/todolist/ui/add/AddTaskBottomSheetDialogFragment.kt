@@ -40,13 +40,14 @@ class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
                     return@setOnClickListener
                 }
 
-                val taskEntry = TaskEntry(
-                    0,
-                    editAddTitle.text.toString(),
-                    System.currentTimeMillis()
+                viewModel.insert(
+                    TaskEntry(
+                        0,
+                        editAddTitle.text.toString(),
+                        System.currentTimeMillis()
+                    )
                 )
 
-                viewModel.insert(taskEntry)
                 Toast.makeText(
                     requireContext(),
                     getString(R.string.toast_added),
