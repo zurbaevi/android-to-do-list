@@ -123,8 +123,7 @@ class TaskFragment : Fragment() {
                 ).apply {
                     setAction(getString(R.string.snackbar_action)) {
                         viewModel.insert(taskEntry)
-                    }
-                    show()
+                    }.show()
                 }
             }
 
