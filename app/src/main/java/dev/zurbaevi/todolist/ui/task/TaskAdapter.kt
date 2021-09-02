@@ -21,6 +21,14 @@ class TaskAdapter : ListAdapter<TaskEntry, TaskAdapter.ViewHolder>(TaskDiffCallb
         this.clickListener = clickListener
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder.from(parent)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.binding(getItem(position), clickListener)
+    }
+
     object TaskDiffCallback : DiffUtil.ItemCallback<TaskEntry>() {
         override fun areItemsTheSame(oldItem: TaskEntry, newItem: TaskEntry) =
             oldItem.id == newItem.id
@@ -28,30 +36,27 @@ class TaskAdapter : ListAdapter<TaskEntry, TaskAdapter.ViewHolder>(TaskDiffCallb
         override fun areContentsTheSame(oldItem: TaskEntry, newItem: TaskEntry) = oldItem == newItem
     }
 
-    inner class ViewHolder(private val binding: RowLayoutBinding) :
+    class ViewHolder private constructor(private val binding: RowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun binding(taskEntry: TaskEntry, clickListener: OnItemClickListener) {
-            binding.textRowTaskTitle.text = taskEntry.title
-            binding.textRowTime.text = DateFormat.getInstance().format(taskEntry.timestamp)
+        fun binding(taskEntry: TaskEntry, clickListener: OnItemClickListener) = with(binding) {
+            textRowTaskTitle.text = taskEntry.title
+            textRowTime.text = DateFormat.getInstance().format(taskEntry.timestamp)
             itemView.setOnClickListener {
                 clickListener.onItemClick(taskEntry)
             }
         }
-    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            RowLayoutBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val current = getItem(position)
-        holder.binding(current, clickListener)
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                return ViewHolder(
+                    RowLayoutBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+            }
+        }
     }
 }
