@@ -22,7 +22,7 @@
             android:gravity="center"
             android:text="@string/fragment_add_add_task"
             android:textColor="@color/white"
-            android:textSize="26sp"
+            android:textSize="24sp"
             tools:ignore="TextContrastCheck" />
 
         <EditText
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textAddTitle"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:backgroundTint="@color/white"
             android:fontFamily="@font/didact_gothic"
             android:hint="@string/fragment_add_enter_task"
@@ -39,7 +39,7 @@
             android:inputType="text"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textSize="20sp"
+            android:textSize="18sp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
         <Button

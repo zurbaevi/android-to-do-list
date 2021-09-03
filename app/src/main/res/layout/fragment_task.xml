@@ -37,7 +37,7 @@
                 android:fontFamily="@font/didact_gothic"
                 android:textColor="@color/white"
                 tools:ignore="TextContrastCheck"
-                tools:text="21 tasks" />
+                tools:text="21 task(s)" />
 
         </RelativeLayout>
 

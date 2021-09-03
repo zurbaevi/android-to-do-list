@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">To Do List</string>
+    <string name="app_name">To Do List</string>
     <string name="fragment_add_add">Add</string>
     <string name="fragment_add_enter_task">Enter Task</string>
     <string name="fragment_add_add_task">Add Task</string>
