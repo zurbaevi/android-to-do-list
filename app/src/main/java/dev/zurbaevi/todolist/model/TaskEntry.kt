@@ -1,4 +1,4 @@
-package dev.zurbaevi.todolist.database
+package dev.zurbaevi.todolist.model
 
 import android.os.Parcelable
 import androidx.room.Entity
@@ -11,5 +11,6 @@ data class TaskEntry(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
     var title: String,
-    var timestamp: Long
+    var timestamp: Long,
+    var completed: Boolean
 ) : Parcelable

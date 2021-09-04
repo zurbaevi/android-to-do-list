@@ -1,4 +1,4 @@
-package dev.zurbaevi.todolist.ui.update
+package dev.zurbaevi.todolist.view.fragment
 
 import android.app.Dialog
 import android.os.Bundle
@@ -12,13 +12,13 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dev.zurbaevi.todolist.R
-import dev.zurbaevi.todolist.database.TaskEntry
-import dev.zurbaevi.todolist.databinding.FragmentUpdateTaskBottomSheetDialogBinding
+import dev.zurbaevi.todolist.databinding.FragmentAddTaskBottomSheetDialogBinding
+import dev.zurbaevi.todolist.model.TaskEntry
 import dev.zurbaevi.todolist.viewmodel.TaskViewModel
 
-class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
+class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
-    private var _binding: FragmentUpdateTaskBottomSheetDialogBinding? = null
+    private var _binding: FragmentAddTaskBottomSheetDialogBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: TaskViewModel by viewModels()
@@ -27,15 +27,11 @@ class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentUpdateTaskBottomSheetDialogBinding.inflate(inflater, container, false)
-
-        val args = UpdateTaskBottomSheetDialogFragmentArgs.fromBundle(requireArguments())
+        _binding = FragmentAddTaskBottomSheetDialogBinding.inflate(inflater, container, false)
 
         binding.apply {
-            editUpdateTask.setText(args.taskEntry.title)
-
-            buttonUpdateTask.setOnClickListener {
-                if (TextUtils.isEmpty(editUpdateTask.text)) {
+            buttonAddTask.setOnClickListener {
+                if (TextUtils.isEmpty(editAddTitle.text)) {
                     Toast.makeText(
                         requireContext(),
                         getString(R.string.toast_empty),
@@ -44,23 +40,24 @@ class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
                     return@setOnClickListener
                 }
 
-                viewModel.update(
+                viewModel.insert(
                     TaskEntry(
-                        args.taskEntry.id,
-                        editUpdateTask.text.toString(),
-                        args.taskEntry.timestamp
+                        0,
+                        editAddTitle.text.toString(),
+                        System.currentTimeMillis(),
+                        false
                     )
                 )
 
                 Toast.makeText(
                     requireContext(),
-                    getString(R.string.toast_updated),
+                    getString(R.string.toast_added),
                     Toast.LENGTH_SHORT
                 ).show()
             }
-
-            return binding.root
         }
+
+        return binding.root
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

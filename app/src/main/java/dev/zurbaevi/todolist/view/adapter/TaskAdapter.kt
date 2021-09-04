@@ -1,21 +1,18 @@
-package dev.zurbaevi.todolist.ui.task
+package dev.zurbaevi.todolist.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import dev.zurbaevi.todolist.database.TaskEntry
 import dev.zurbaevi.todolist.databinding.RowLayoutBinding
+import dev.zurbaevi.todolist.model.TaskEntry
+import dev.zurbaevi.todolist.view.listener.OnItemClickListener
 import java.text.DateFormat
 
 class TaskAdapter : ListAdapter<TaskEntry, TaskAdapter.ViewHolder>(TaskDiffCallback) {
 
     private lateinit var clickListener: OnItemClickListener
-
-    interface OnItemClickListener {
-        fun onItemClick(taskEntry: TaskEntry)
-    }
 
     fun setOnItemClickListener(clickListener: OnItemClickListener) {
         this.clickListener = clickListener
@@ -40,8 +37,17 @@ class TaskAdapter : ListAdapter<TaskEntry, TaskAdapter.ViewHolder>(TaskDiffCallb
         RecyclerView.ViewHolder(binding.root) {
 
         fun binding(taskEntry: TaskEntry, clickListener: OnItemClickListener) = with(binding) {
-            textRowTaskTitle.text = taskEntry.title
+            checkboxCompletedTask.text = taskEntry.title
+            checkboxCompletedTask.isChecked = taskEntry.completed
             textRowTime.text = DateFormat.getInstance().format(taskEntry.timestamp)
+            checkboxCompletedTask.setOnClickListener {
+                clickListener.onCheckClick(
+                    taskEntry.id,
+                    taskEntry.title,
+                    taskEntry.timestamp,
+                    checkboxCompletedTask.isChecked
+                )
+            }
             itemView.setOnClickListener {
                 clickListener.onItemClick(taskEntry)
             }

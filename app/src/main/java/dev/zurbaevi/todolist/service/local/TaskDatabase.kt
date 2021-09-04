@@ -1,11 +1,12 @@
-package dev.zurbaevi.todolist.database
+package dev.zurbaevi.todolist.service.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import dev.zurbaevi.todolist.model.TaskEntry
 
-@Database(entities = [TaskEntry::class], version = 1, exportSchema = false)
+@Database(entities = [TaskEntry::class], version = 2, exportSchema = false)
 abstract class TaskDatabase : RoomDatabase() {
 
     abstract fun taskDao(): TaskDao

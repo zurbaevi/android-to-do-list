@@ -1,7 +1,8 @@
-package dev.zurbaevi.todolist.database
+package dev.zurbaevi.todolist.service.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import dev.zurbaevi.todolist.model.TaskEntry
 
 @Dao
 interface TaskDao {

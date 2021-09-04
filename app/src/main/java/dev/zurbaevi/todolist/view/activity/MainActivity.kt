@@ -1,4 +1,4 @@
-package dev.zurbaevi.todolist.ui
+package dev.zurbaevi.todolist.view.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

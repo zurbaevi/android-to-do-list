@@ -1,4 +1,4 @@
-package dev.zurbaevi.todolist.ui.task
+package dev.zurbaevi.todolist.view.fragment
 
 import android.app.AlertDialog
 import android.content.DialogInterface
@@ -15,10 +15,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.google.android.material.snackbar.Snackbar
 import dev.zurbaevi.todolist.R
-import dev.zurbaevi.todolist.database.TaskEntry
 import dev.zurbaevi.todolist.databinding.FragmentTaskBinding
+import dev.zurbaevi.todolist.model.TaskEntry
 import dev.zurbaevi.todolist.util.getCurrentDate
 import dev.zurbaevi.todolist.util.safeNavigate
+import dev.zurbaevi.todolist.view.adapter.TaskAdapter
+import dev.zurbaevi.todolist.view.listener.OnItemClickListener
 import dev.zurbaevi.todolist.viewmodel.TaskViewModel
 
 class TaskFragment : Fragment() {
@@ -37,13 +39,17 @@ class TaskFragment : Fragment() {
         _binding = FragmentTaskBinding.inflate(inflater, container, false)
 
         adapter = TaskAdapter()
-        adapter.setOnItemClickListener(object : TaskAdapter.OnItemClickListener {
+        adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(taskEntry: TaskEntry) {
                 findNavController().safeNavigate(
                     TaskFragmentDirections.actionTaskFragmentToUpdateTaskBottomSheetDialogFragment(
                         taskEntry
                     )
                 )
+            }
+
+            override fun onCheckClick(id: Int, title: String, timestamp: Long, completed: Boolean) {
+                viewModel.update(TaskEntry(id, title, timestamp, completed))
             }
         })
 
@@ -121,9 +127,7 @@ class TaskFragment : Fragment() {
                     getString(R.string.toast_deleted),
                     Snackbar.LENGTH_SHORT
                 ).apply {
-                    setAction(getString(R.string.snackbar_action)) {
-                        viewModel.insert(taskEntry)
-                    }.show()
+                    setAction(getString(R.string.snackbar_action)) { viewModel.insert(taskEntry) }.show()
                 }
             }
 

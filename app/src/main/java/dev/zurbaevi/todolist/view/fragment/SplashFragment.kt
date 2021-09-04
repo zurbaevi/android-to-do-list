@@ -1,4 +1,4 @@
-package dev.zurbaevi.todolist.ui
+package dev.zurbaevi.todolist.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
