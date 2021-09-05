@@ -20,7 +20,16 @@
             android:buttonTint="@color/blue_gray_900"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="TouchTargetSizeCheck"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue_gray_900"
+            app:layout_constraintBottom_toTopOf="@+id/imageIconTime"
+            app:layout_constraintStart_toEndOf="@+id/checkboxCompletedTask"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/lorem" />
 
         <ImageView

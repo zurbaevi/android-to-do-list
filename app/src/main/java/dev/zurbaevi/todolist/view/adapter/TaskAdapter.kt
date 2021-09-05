@@ -10,20 +10,21 @@ import dev.zurbaevi.todolist.model.TaskEntry
 import dev.zurbaevi.todolist.view.listener.OnItemClickListener
 import java.text.DateFormat
 
-class TaskAdapter : ListAdapter<TaskEntry, TaskAdapter.ViewHolder>(TaskDiffCallback) {
-
-    private lateinit var clickListener: OnItemClickListener
-
-    fun setOnItemClickListener(clickListener: OnItemClickListener) {
-        this.clickListener = clickListener
-    }
+class TaskAdapter(private var clickListener: OnItemClickListener) :
+    ListAdapter<TaskEntry, TaskAdapter.ViewHolder>(TaskDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        return ViewHolder(
+            RowLayoutBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding(getItem(position), clickListener)
+        holder.binding(getItem(position))
     }
 
     object TaskDiffCallback : DiffUtil.ItemCallback<TaskEntry>() {
@@ -33,36 +34,34 @@ class TaskAdapter : ListAdapter<TaskEntry, TaskAdapter.ViewHolder>(TaskDiffCallb
         override fun areContentsTheSame(oldItem: TaskEntry, newItem: TaskEntry) = oldItem == newItem
     }
 
-    class ViewHolder private constructor(private val binding: RowLayoutBinding) :
+    inner class ViewHolder(private val binding: RowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun binding(taskEntry: TaskEntry, clickListener: OnItemClickListener) = with(binding) {
-            checkboxCompletedTask.text = taskEntry.title
-            checkboxCompletedTask.isChecked = taskEntry.completed
-            textRowTime.text = DateFormat.getInstance().format(taskEntry.timestamp)
-            checkboxCompletedTask.setOnClickListener {
-                clickListener.onCheckClick(
-                    taskEntry.id,
-                    taskEntry.title,
-                    taskEntry.timestamp,
-                    checkboxCompletedTask.isChecked
-                )
-            }
-            itemView.setOnClickListener {
-                clickListener.onItemClick(taskEntry)
+        init {
+            binding.apply {
+                root.setOnClickListener {
+                    val position = adapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        clickListener.onItemClick(getItem(position))
+                    }
+                }
+                checkboxCompletedTask.setOnClickListener {
+                    val position = adapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        clickListener.onCheckBoxClick(
+                            getItem(position),
+                            checkboxCompletedTask.isChecked
+                        )
+                    }
+                }
             }
         }
 
-        companion object {
-            fun from(parent: ViewGroup): ViewHolder {
-                return ViewHolder(
-                    RowLayoutBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
-                    )
-                )
-            }
+        fun binding(taskEntry: TaskEntry) = with(binding) {
+            checkboxCompletedTask.isChecked = taskEntry.completed
+            textViewTitle.text = taskEntry.title
+            textViewTitle.paint.isStrikeThruText = taskEntry.completed
+            textRowTime.text = DateFormat.getInstance().format(taskEntry.timestamp)
         }
     }
 }

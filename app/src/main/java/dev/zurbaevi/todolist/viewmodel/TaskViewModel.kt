@@ -22,9 +22,9 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun update(taskEntry: TaskEntry) {
+    fun update(taskEntry: TaskEntry, isChecked: Boolean = false) {
         viewModelScope.launch {
-            taskRepository.update(taskEntry)
+            taskRepository.update(taskEntry.copy(completed = isChecked))
         }
     }
 

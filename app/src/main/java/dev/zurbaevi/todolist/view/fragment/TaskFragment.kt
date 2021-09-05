@@ -23,7 +23,7 @@ import dev.zurbaevi.todolist.view.adapter.TaskAdapter
 import dev.zurbaevi.todolist.view.listener.OnItemClickListener
 import dev.zurbaevi.todolist.viewmodel.TaskViewModel
 
-class TaskFragment : Fragment() {
+class TaskFragment : Fragment(), OnItemClickListener {
 
     private var _binding: FragmentTaskBinding? = null
     private val binding get() = _binding!!
@@ -38,20 +38,7 @@ class TaskFragment : Fragment() {
     ): View {
         _binding = FragmentTaskBinding.inflate(inflater, container, false)
 
-        adapter = TaskAdapter()
-        adapter.setOnItemClickListener(object : OnItemClickListener {
-            override fun onItemClick(taskEntry: TaskEntry) {
-                findNavController().safeNavigate(
-                    TaskFragmentDirections.actionTaskFragmentToUpdateTaskBottomSheetDialogFragment(
-                        taskEntry
-                    )
-                )
-            }
-
-            override fun onCheckClick(id: Int, title: String, timestamp: Long, completed: Boolean) {
-                viewModel.update(TaskEntry(id, title, timestamp, completed))
-            }
-        })
+        adapter = TaskAdapter(this)
 
         binding.textTodayTitle.text = getCurrentDate()
 
@@ -139,5 +126,17 @@ class TaskFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemClick(taskEntry: TaskEntry) {
+        findNavController().safeNavigate(
+            TaskFragmentDirections.actionTaskFragmentToUpdateTaskBottomSheetDialogFragment(
+                taskEntry
+            )
+        )
+    }
+
+    override fun onCheckBoxClick(taskEntry: TaskEntry, isChecked: Boolean) {
+        viewModel.update(taskEntry, isChecked)
     }
 }
