@@ -6,4 +6,4 @@ import java.util.*
 
 @SuppressLint("SimpleDateFormat")
 fun getCurrentDate(): String =
-    SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH).format(Calendar.getInstance().time)
+    SimpleDateFormat("EEE, MMM d, yy", Locale.ENGLISH).format(Calendar.getInstance().time)

@@ -19,9 +19,12 @@ interface TaskDao {
     @Query("DELETE FROM task_table")
     suspend fun deleteAllTasks()
 
+    @Query("DELETE FROM task_table WHERE completed LIKE 1")
+    suspend fun deleteCompletedTasks()
+
     @Query("SELECT * FROM task_table ORDER BY timestamp DESC")
     fun getAllTasks(): LiveData<List<TaskEntry>>
 
-    @Query("SELECT COUNT(*) FROM task_table")
+    @Query("SELECT COUNT(*) FROM task_table WHERE completed LIKE 0")
     fun getAllTasksCount(): LiveData<Int>
 }

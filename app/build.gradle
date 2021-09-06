@@ -72,4 +72,7 @@ dependencies {
 
     // Lottie splash screen
     implementation 'com.airbnb.android:lottie:4.0.0'
+
+    // Dynamic toasts
+    implementation 'com.pranavpandey.android:dynamic-toasts:4.1.0'
 }

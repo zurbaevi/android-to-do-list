@@ -32,6 +32,12 @@ class TaskRepository(private val taskDao: TaskDao) {
         }
     }
 
+    suspend fun deleteCompletedTasks() {
+        withContext(Dispatchers.IO) {
+            taskDao.deleteCompletedTasks()
+        }
+    }
+
     fun getAllTasks(): LiveData<List<TaskEntry>> = taskDao.getAllTasks()
 
     fun getAllTasksCount(): LiveData<Int> = taskDao.getAllTasksCount()

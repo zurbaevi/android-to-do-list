@@ -26,7 +26,7 @@
                 android:textSize="25sp"
                 android:textStyle="bold"
                 tools:ignore="TextContrastCheck"
-                tools:text="21 august 2021" />
+                tools:text="Mon, Sep 6, 21" />
 
             <TextView
                 android:id="@+id/textTaskCount"
@@ -37,7 +37,7 @@
                 android:fontFamily="@font/didact_gothic"
                 android:textColor="@color/white"
                 tools:ignore="TextContrastCheck"
-                tools:text="21 task(s)" />
+                tools:text="21 more Todo" />
 
         </RelativeLayout>
 
@@ -86,12 +86,21 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabExpandMenuButtonDeleteTask"
+            android:id="@+id/fabExpandMenuButtonDeleteCompletedTasks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/blue_gray_800"
             app:fab_colorPressed="@color/blue_gray_900"
-            app:fab_icon="@drawable/ic_delete"
+            app:fab_icon="@drawable/ic_delete_completed_tasks"
+            app:fab_size="mini" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabExpandMenuButtonDeleteTasks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/blue_gray_800"
+            app:fab_colorPressed="@color/blue_gray_900"
+            app:fab_icon="@drawable/ic_delete_all_tasks"
             app:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton

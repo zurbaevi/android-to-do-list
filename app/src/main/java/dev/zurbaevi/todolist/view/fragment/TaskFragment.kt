@@ -1,22 +1,21 @@
 package dev.zurbaevi.todolist.view.fragment
 
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.getbase.floatingactionbutton.FloatingActionsMenu
-import com.google.android.material.snackbar.Snackbar
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dev.zurbaevi.todolist.R
 import dev.zurbaevi.todolist.databinding.FragmentTaskBinding
 import dev.zurbaevi.todolist.model.TaskEntry
+import dev.zurbaevi.todolist.util.alertCompletedTasksDialog
+import dev.zurbaevi.todolist.util.alertDeleteAllTasksDialog
 import dev.zurbaevi.todolist.util.getCurrentDate
 import dev.zurbaevi.todolist.util.safeNavigate
 import dev.zurbaevi.todolist.view.adapter.TaskAdapter
@@ -66,31 +65,19 @@ class TaskFragment : Fragment(), OnItemClickListener {
                         findNavController().safeNavigate(TaskFragmentDirections.actionTaskFragmentToAddTaskBottomSheetDialogFragment())
                         floatingActionsMenu.collapse()
                     }
-                    binding.fabExpandMenuButtonDeleteTask.setOnClickListener {
-                        AlertDialog.Builder(requireContext())
-                            .setTitle(getString(R.string.alert_dialog_title))
-                            .setMessage(getString(R.string.alert_dialog_message))
-                            .setPositiveButton(getString(R.string.alert_dialog_positive_button)) { dialog: DialogInterface, _: Int ->
-                                viewModel.deleteAllTasks()
-                                dialog.dismiss()
-                                Toast.makeText(
-                                    requireContext(),
-                                    getString(R.string.toast_deleted),
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
-                            }
-                            .setNegativeButton(getString(R.string.alert_dialog_negative_button)) { dialog: DialogInterface, _: Int ->
-                                dialog.dismiss()
-                            }
-                            .create().show()
+                    binding.fabExpandMenuButtonDeleteTasks.setOnClickListener {
+                        alertDeleteAllTasksDialog(requireContext()) { viewModel.deleteAllTasks() }
+                        floatingActionsMenu.collapse()
+                    }
+
+                    binding.fabExpandMenuButtonDeleteCompletedTasks.setOnClickListener {
+                        alertCompletedTasksDialog(requireContext()) { viewModel.deleteCompletedTasks() }
                         floatingActionsMenu.collapse()
                     }
                 }
 
                 override fun onMenuCollapsed() {
                 }
-
             })
         }
 
@@ -108,14 +95,10 @@ class TaskFragment : Fragment(), OnItemClickListener {
                 val position = viewHolder.adapterPosition
                 val taskEntry = adapter.currentList[position]
                 viewModel.delete(taskEntry)
-
-                Snackbar.make(
-                    binding.root,
-                    getString(R.string.toast_deleted),
-                    Snackbar.LENGTH_SHORT
-                ).apply {
-                    setAction(getString(R.string.snackbar_action)) { viewModel.insert(taskEntry) }.show()
-                }
+                DynamicToast.makeSuccess(
+                    requireContext(),
+                    getString(R.string.dynamic_toast_deleted)
+                ).show()
             }
 
         }).attachToRecyclerView(binding.recyclerView)

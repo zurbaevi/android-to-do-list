@@ -6,11 +6,11 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dev.zurbaevi.todolist.R
 import dev.zurbaevi.todolist.databinding.FragmentUpdateTaskBottomSheetDialogBinding
 import dev.zurbaevi.todolist.model.TaskEntry
@@ -36,10 +36,9 @@ class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
             buttonUpdateTask.setOnClickListener {
                 if (TextUtils.isEmpty(editUpdateTask.text)) {
-                    Toast.makeText(
+                    DynamicToast.makeWarning(
                         requireContext(),
-                        getString(R.string.toast_empty),
-                        Toast.LENGTH_SHORT
+                        getString(R.string.dynamic_toast_empty)
                     ).show()
                     return@setOnClickListener
                 }
@@ -53,10 +52,9 @@ class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
                     )
                 )
 
-                Toast.makeText(
+                DynamicToast.makeSuccess(
                     requireContext(),
-                    getString(R.string.toast_updated),
-                    Toast.LENGTH_SHORT
+                    getString(R.string.dynamic_toast_updated)
                 ).show()
             }
 

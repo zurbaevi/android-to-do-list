@@ -11,15 +11,16 @@
     <string name="menu_search">Search</string>
     <string name="fragment_task_clear_all_tasks">Clear all tasks</string>
     <string name="text_empty_list">You don\'t have any tasks</string>
-    <string name="tasks">task(s)</string>
-    <string name="toast_empty">It\'s empty</string>
-    <string name="toast_deleted">Deleted</string>
-    <string name="toast_updated">Updated</string>
+    <string name="tasks">more Todo</string>
     <string name="alert_dialog_negative_button">No</string>
     <string name="alert_dialog_positive_button">Yes</string>
     <string name="alert_dialog_title">Delete all tasks</string>
+    <string name="alert_dialog_completed_title">Delete completed tasks</string>
     <string name="alert_dialog_message">Are you, sure you want to delete all tasks?</string>
-    <string name="snackbar_action">Undo</string>
-    <string name="toast_added">Added</string>
+    <string name="alert_dialog_completed_message">Are you, sure you want to delete completed tasks?</string>
     <string name="content_description_logo">Logo</string>
+    <string name="dynamic_toast_deleted">Successful deleted</string>
+    <string name="dynamic_toast_added">Successful added</string>
+    <string name="dynamic_toast_updated">Successful updated</string>
+    <string name="dynamic_toast_empty">You haven\'t entered anything</string>
 </resources>

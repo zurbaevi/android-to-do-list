@@ -6,11 +6,11 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.pranavpandey.android.dynamic.toasts.DynamicToast
 import dev.zurbaevi.todolist.R
 import dev.zurbaevi.todolist.databinding.FragmentAddTaskBottomSheetDialogBinding
 import dev.zurbaevi.todolist.model.TaskEntry
@@ -32,10 +32,9 @@ class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
         binding.apply {
             buttonAddTask.setOnClickListener {
                 if (TextUtils.isEmpty(editAddTitle.text)) {
-                    Toast.makeText(
+                    DynamicToast.makeWarning(
                         requireContext(),
-                        getString(R.string.toast_empty),
-                        Toast.LENGTH_SHORT
+                        getString(R.string.dynamic_toast_empty)
                     ).show()
                     return@setOnClickListener
                 }
@@ -49,11 +48,8 @@ class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
                     )
                 )
 
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.toast_added),
-                    Toast.LENGTH_SHORT
-                ).show()
+                DynamicToast.makeSuccess(requireContext(), getString(R.string.dynamic_toast_added))
+                    .show()
             }
         }
 
