@@ -28,6 +28,11 @@ class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentUpdateTaskBottomSheetDialogBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val args = UpdateTaskBottomSheetDialogFragmentArgs.fromBundle(requireArguments())
 
@@ -58,7 +63,6 @@ class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
                 ).show()
             }
 
-            return binding.root
         }
     }
 

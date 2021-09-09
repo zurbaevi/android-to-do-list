@@ -1,5 +1,7 @@
 package dev.zurbaevi.todolist.view.fragment
 
+import android.graphics.Canvas
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +23,7 @@ import dev.zurbaevi.todolist.util.safeNavigate
 import dev.zurbaevi.todolist.view.adapter.TaskAdapter
 import dev.zurbaevi.todolist.view.listener.OnItemClickListener
 import dev.zurbaevi.todolist.viewmodel.TaskViewModel
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 class TaskFragment : Fragment(), OnItemClickListener {
 
@@ -29,48 +32,41 @@ class TaskFragment : Fragment(), OnItemClickListener {
 
     private val viewModel: TaskViewModel by viewModels()
 
-    private lateinit var adapter: TaskAdapter
+    private var adapter: TaskAdapter = TaskAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentTaskBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        adapter = TaskAdapter(this)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        binding.textTodayTitle.text = getCurrentDate()
-
-        viewModel.getAllTasks.observe(viewLifecycleOwner, {
-            if (it.isEmpty()) {
-                binding.textEmptyList.visibility = View.VISIBLE
-            } else {
-                binding.textEmptyList.visibility = View.GONE
-            }
-            adapter.submitList(it)
-        })
-
-        viewModel.getAllTasksCount.observe(viewLifecycleOwner, {
-            binding.textTaskCount.text = String.format("$it %s", getString(R.string.tasks))
-        })
+        implementsObservers()
+        implementsItemTouchHelper()
 
         binding.apply {
 
-            binding.recyclerView.adapter = adapter
+            textTodayTitle.text = getCurrentDate()
+
+            recyclerView.adapter = adapter
 
             floatingActionsMenu.setOnFloatingActionsMenuUpdateListener(object :
                 FloatingActionsMenu.OnFloatingActionsMenuUpdateListener {
                 override fun onMenuExpanded() {
-                    binding.fabExpandMenuButtonAddTask.setOnClickListener {
+                    fabExpandMenuButtonAddTask.setOnClickListener {
                         findNavController().safeNavigate(TaskFragmentDirections.actionTaskFragmentToAddTaskBottomSheetDialogFragment())
                         floatingActionsMenu.collapse()
                     }
-                    binding.fabExpandMenuButtonDeleteTasks.setOnClickListener {
+                    fabExpandMenuButtonDeleteTasks.setOnClickListener {
                         alertDeleteAllTasksDialog(requireContext()) { viewModel.deleteAllTasks() }
                         floatingActionsMenu.collapse()
                     }
 
-                    binding.fabExpandMenuButtonDeleteCompletedTasks.setOnClickListener {
+                    fabExpandMenuButtonDeleteCompletedTasks.setOnClickListener {
                         alertCompletedTasksDialog(requireContext()) { viewModel.deleteCompletedTasks() }
                         floatingActionsMenu.collapse()
                     }
@@ -80,7 +76,26 @@ class TaskFragment : Fragment(), OnItemClickListener {
                 }
             })
         }
+    }
 
+    private fun implementsObservers() {
+        viewModel.getAllTasks.observe(viewLifecycleOwner, {
+            it?.let {
+                if (it.isEmpty()) {
+                    binding.textEmptyList.visibility = View.VISIBLE
+                } else {
+                    binding.textEmptyList.visibility = View.GONE
+                }
+                adapter.submitList(it)
+            }
+        })
+
+        viewModel.getAllTasksCount.observe(viewLifecycleOwner, {
+            binding.textTaskCount.text = String.format("$it %s", getString(R.string.tasks))
+        })
+    }
+
+    private fun implementsItemTouchHelper() {
         ItemTouchHelper(object :
             ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(
@@ -101,14 +116,40 @@ class TaskFragment : Fragment(), OnItemClickListener {
                 ).show()
             }
 
+            override fun onChildDraw(
+                c: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                super.onChildDraw(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
+                RecyclerViewSwipeDecorator.Builder(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                ).addBackgroundColor(Color.RED)
+                    .addActionIcon(R.drawable.ic_delete)
+                    .setActionIconTint(Color.WHITE)
+                    .create()
+                    .decorate()
+            }
+
         }).attachToRecyclerView(binding.recyclerView)
-
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onItemClick(taskEntry: TaskEntry) {
@@ -121,5 +162,10 @@ class TaskFragment : Fragment(), OnItemClickListener {
 
     override fun onCheckBoxClick(taskEntry: TaskEntry, isChecked: Boolean) {
         viewModel.update(taskEntry, isChecked)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

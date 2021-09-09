@@ -1,4 +1,4 @@
-package dev.zurbaevi.todolist.service.local
+package dev.zurbaevi.todolist.service.repository.local
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

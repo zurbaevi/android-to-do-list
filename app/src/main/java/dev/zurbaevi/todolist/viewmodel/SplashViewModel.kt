@@ -15,7 +15,7 @@ class SplashViewModel : ViewModel() {
 
     fun initSplashScreen() {
         viewModelScope.launch {
-            delay(2000)
+            delay(1000)
             updateLiveData()
         }
     }

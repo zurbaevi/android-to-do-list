@@ -5,6 +5,16 @@ buildscript {
         room_version = "2.3.0"
         coroutines = "1.5.0"
         lifecycle_version = "2.3.1"
+        getbaseFabVersion = "1.10.1"
+        dynamicToastVersion = "4.1.0"
+        recyclerViewSwipeDecoratorVersion = "1.2.3"
+        coreKtxVersion = "1.6.0"
+        appcompatVersion = "1.3.1"
+        materialVersion = "1.4.0"
+        constraintLayoutVersion = "2.1.0"
+        junitVersion = "4.13.2"
+        testJunitVersion = "1.1.3"
+        espressoVersion = "3.4.0"
     }
     repositories {
         google()

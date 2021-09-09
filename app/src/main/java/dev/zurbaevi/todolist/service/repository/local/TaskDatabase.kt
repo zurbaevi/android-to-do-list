@@ -1,12 +1,14 @@
-package dev.zurbaevi.todolist.service.local
+package dev.zurbaevi.todolist.service.repository.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import dev.zurbaevi.todolist.model.TaskEntry
+import dev.zurbaevi.todolist.service.Constants.DATABASE_NAME
+import dev.zurbaevi.todolist.service.Constants.DATABASE_VERSION
 
-@Database(entities = [TaskEntry::class], version = 2, exportSchema = false)
+@Database(entities = [TaskEntry::class], version = DATABASE_VERSION, exportSchema = false)
 abstract class TaskDatabase : RoomDatabase() {
 
     abstract fun taskDao(): TaskDao
@@ -23,7 +25,7 @@ abstract class TaskDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         TaskDatabase::class.java,
-                        "task_database"
+                        DATABASE_NAME
                     ).fallbackToDestructiveMigration()
                         .build()
                     INSTANCE = instance

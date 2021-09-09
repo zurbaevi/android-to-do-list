@@ -2,7 +2,7 @@ package dev.zurbaevi.todolist.service.repository
 
 import androidx.lifecycle.LiveData
 import dev.zurbaevi.todolist.model.TaskEntry
-import dev.zurbaevi.todolist.service.local.TaskDao
+import dev.zurbaevi.todolist.service.repository.local.TaskDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

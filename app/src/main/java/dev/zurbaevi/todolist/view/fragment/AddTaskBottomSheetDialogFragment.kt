@@ -28,6 +28,11 @@ class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddTaskBottomSheetDialogBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
             buttonAddTask.setOnClickListener {
@@ -52,8 +57,6 @@ class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
                     .show()
             }
         }
-
-        return binding.root
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

@@ -7,8 +7,13 @@
     tools:context=".view.fragment.TaskFragment">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -19,13 +24,14 @@
                 android:id="@+id/textTodayTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="34dp"
                 android:layout_marginTop="35dp"
                 android:fontFamily="@font/didact_gothic"
                 android:textColor="@color/white"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                tools:ignore="TextContrastCheck"
                 tools:text="Mon, Sep 6, 21" />
 
             <TextView
@@ -33,10 +39,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textTodayTitle"
-                android:layout_marginStart="20dp"
+                android:layout_alignStart="@+id/textTodayTitle"
+                android:layout_marginStart="0dp"
                 android:fontFamily="@font/didact_gothic"
                 android:textColor="@color/white"
-                tools:ignore="TextContrastCheck"
                 tools:text="21 more Todo" />
 
         </RelativeLayout>
@@ -67,7 +73,7 @@
             android:layout_centerInParent="true"
             android:fontFamily="@font/didact_gothic"
             android:text="@string/text_empty_list"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:visibility="gone" />
 
     </RelativeLayout>
@@ -86,15 +92,6 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabExpandMenuButtonDeleteCompletedTasks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/blue_gray_800"
-            app:fab_colorPressed="@color/blue_gray_900"
-            app:fab_icon="@drawable/ic_delete_completed_tasks"
-            app:fab_size="mini" />
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabExpandMenuButtonDeleteTasks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,12 +101,21 @@
             app:fab_size="mini" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabExpandMenuButtonDeleteCompletedTasks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_colorNormal="@color/blue_gray_800"
+            app:fab_colorPressed="@color/blue_gray_900"
+            app:fab_icon="@drawable/ic_delete"
+            app:fab_size="mini" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabExpandMenuButtonAddTask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/blue_gray_800"
             app:fab_colorPressed="@color/blue_gray_900"
-            app:fab_icon="@drawable/ic_add"
+            app:fab_icon="@drawable/ic_add_task"
             app:fab_size="mini" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

@@ -24,13 +24,19 @@ class SplashFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSplashBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         splashViewModel.initSplashScreen()
+        implementsObservers()
+    }
+
+    private fun implementsObservers() {
         splashViewModel.liveData.observe(viewLifecycleOwner, {
             findNavController().safeNavigate(SplashFragmentDirections.actionSplashFragmentToTaskFragment())
         })
-
-        return binding.root
     }
 
     override fun onDestroyView() {
