@@ -41,4 +41,5 @@ class TaskRepository(private val taskDao: TaskDao) {
     fun getAllTasks(): LiveData<List<TaskEntry>> = taskDao.getAllTasks()
 
     fun getAllTasksCount(): LiveData<Int> = taskDao.getAllTasksCount()
+
 }

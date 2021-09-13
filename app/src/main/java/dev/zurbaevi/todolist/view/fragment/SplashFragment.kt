@@ -43,4 +43,5 @@ class SplashFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

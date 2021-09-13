@@ -27,4 +27,5 @@ interface TaskDao {
 
     @Query("SELECT COUNT(*) FROM task_table WHERE completed LIKE 0")
     fun getAllTasksCount(): LiveData<Int>
+
 }

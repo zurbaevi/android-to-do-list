@@ -27,7 +27,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="34dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="34dp"
                 android:fontFamily="@font/didact_gothic"
                 android:textColor="@color/white"
                 android:textSize="25sp"
@@ -50,7 +50,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="110dp"
+            android:layout_marginTop="100dp"
             android:background="@drawable/left_corner_background"
             android:paddingStart="20dp"
             android:paddingTop="20dp"
@@ -60,7 +60,9 @@
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:clipToPadding="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/row_layout" />
 
@@ -97,8 +99,8 @@
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/blue_gray_800"
             app:fab_colorPressed="@color/blue_gray_900"
-            app:fab_icon="@drawable/ic_delete_all_tasks"
-            app:fab_size="mini" />
+            app:fab_icon="@drawable/ic_delete"
+            app:fab_size="normal" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabExpandMenuButtonDeleteCompletedTasks"
@@ -106,8 +108,8 @@
             android:layout_height="wrap_content"
             app:fab_colorNormal="@color/blue_gray_800"
             app:fab_colorPressed="@color/blue_gray_900"
-            app:fab_icon="@drawable/ic_delete"
-            app:fab_size="mini" />
+            app:fab_icon="@drawable/ic_remove_done"
+            app:fab_size="normal" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabExpandMenuButtonAddTask"
@@ -116,7 +118,7 @@
             app:fab_colorNormal="@color/blue_gray_800"
             app:fab_colorPressed="@color/blue_gray_900"
             app:fab_icon="@drawable/ic_add_task"
-            app:fab_size="mini" />
+            app:fab_size="normal" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

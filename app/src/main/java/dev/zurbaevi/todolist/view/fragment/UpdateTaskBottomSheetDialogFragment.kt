@@ -15,13 +15,16 @@ import dev.zurbaevi.todolist.R
 import dev.zurbaevi.todolist.databinding.FragmentUpdateTaskBottomSheetDialogBinding
 import dev.zurbaevi.todolist.model.TaskEntry
 import dev.zurbaevi.todolist.viewmodel.TaskViewModel
+import dev.zurbaevi.todolist.viewmodel.TaskViewModelProviderFactory
 
 class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentUpdateTaskBottomSheetDialogBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: TaskViewModel by viewModels()
+    private val taskViewModel: TaskViewModel by viewModels {
+        TaskViewModelProviderFactory.getInstance(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +51,7 @@ class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
                     return@setOnClickListener
                 }
 
-                viewModel.update(
+                taskViewModel.update(
                     TaskEntry(
                         args.taskEntry.id,
                         editUpdateTask.text.toString(),

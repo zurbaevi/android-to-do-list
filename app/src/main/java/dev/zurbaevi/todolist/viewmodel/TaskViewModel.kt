@@ -1,17 +1,12 @@
 package dev.zurbaevi.todolist.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.zurbaevi.todolist.model.TaskEntry
 import dev.zurbaevi.todolist.service.repository.TaskRepository
-import dev.zurbaevi.todolist.service.repository.local.TaskDatabase
 import kotlinx.coroutines.launch
 
-class TaskViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val taskDao = TaskDatabase.getDatabase(application).taskDao()
-    private val taskRepository = TaskRepository(taskDao)
+class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
 
     val getAllTasks = taskRepository.getAllTasks()
     val getAllTasksCount = taskRepository.getAllTasksCount()

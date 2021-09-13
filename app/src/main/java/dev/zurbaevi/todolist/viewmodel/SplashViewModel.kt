@@ -23,4 +23,5 @@ class SplashViewModel : ViewModel() {
     private fun updateLiveData() {
         _liveData.value = true
     }
+
 }

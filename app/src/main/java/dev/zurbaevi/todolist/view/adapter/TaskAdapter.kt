@@ -64,4 +64,5 @@ class TaskAdapter(private var clickListener: OnItemClickListener) :
             textRowTime.text = DateFormat.getInstance().format(taskEntry.timestamp)
         }
     }
+
 }

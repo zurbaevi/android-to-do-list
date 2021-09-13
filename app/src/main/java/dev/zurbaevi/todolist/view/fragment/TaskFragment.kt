@@ -23,6 +23,7 @@ import dev.zurbaevi.todolist.util.safeNavigate
 import dev.zurbaevi.todolist.view.adapter.TaskAdapter
 import dev.zurbaevi.todolist.view.listener.OnItemClickListener
 import dev.zurbaevi.todolist.viewmodel.TaskViewModel
+import dev.zurbaevi.todolist.viewmodel.TaskViewModelProviderFactory
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
 
 class TaskFragment : Fragment(), OnItemClickListener {
@@ -30,7 +31,9 @@ class TaskFragment : Fragment(), OnItemClickListener {
     private var _binding: FragmentTaskBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: TaskViewModel by viewModels()
+    private val taskViewModel: TaskViewModel by viewModels {
+        TaskViewModelProviderFactory.getInstance(requireContext())
+    }
 
     private var adapter: TaskAdapter = TaskAdapter(this)
 
@@ -62,12 +65,12 @@ class TaskFragment : Fragment(), OnItemClickListener {
                         floatingActionsMenu.collapse()
                     }
                     fabExpandMenuButtonDeleteTasks.setOnClickListener {
-                        alertDeleteAllTasksDialog(requireContext()) { viewModel.deleteAllTasks() }
+                        alertDeleteAllTasksDialog(requireContext()) { taskViewModel.deleteAllTasks() }
                         floatingActionsMenu.collapse()
                     }
 
                     fabExpandMenuButtonDeleteCompletedTasks.setOnClickListener {
-                        alertCompletedTasksDialog(requireContext()) { viewModel.deleteCompletedTasks() }
+                        alertCompletedTasksDialog(requireContext()) { taskViewModel.deleteCompletedTasks() }
                         floatingActionsMenu.collapse()
                     }
                 }
@@ -79,7 +82,7 @@ class TaskFragment : Fragment(), OnItemClickListener {
     }
 
     private fun implementsObservers() {
-        viewModel.getAllTasks.observe(viewLifecycleOwner, {
+        taskViewModel.getAllTasks.observe(viewLifecycleOwner, {
             it?.let {
                 if (it.isEmpty()) {
                     binding.textEmptyList.visibility = View.VISIBLE
@@ -90,7 +93,7 @@ class TaskFragment : Fragment(), OnItemClickListener {
             }
         })
 
-        viewModel.getAllTasksCount.observe(viewLifecycleOwner, {
+        taskViewModel.getAllTasksCount.observe(viewLifecycleOwner, {
             binding.textTaskCount.text = String.format("$it %s", getString(R.string.tasks))
         })
     }
@@ -109,7 +112,7 @@ class TaskFragment : Fragment(), OnItemClickListener {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val taskEntry = adapter.currentList[position]
-                viewModel.delete(taskEntry)
+                taskViewModel.delete(taskEntry)
                 DynamicToast.makeSuccess(
                     requireContext(),
                     getString(R.string.dynamic_toast_deleted)
@@ -161,7 +164,7 @@ class TaskFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onCheckBoxClick(taskEntry: TaskEntry, isChecked: Boolean) {
-        viewModel.update(taskEntry, isChecked)
+        taskViewModel.update(taskEntry, isChecked)
     }
 
     override fun onDestroyView() {
