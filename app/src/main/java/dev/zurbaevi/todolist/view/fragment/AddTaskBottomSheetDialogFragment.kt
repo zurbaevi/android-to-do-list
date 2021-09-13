@@ -56,6 +56,8 @@ class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
                     )
                 )
 
+                binding.editAddTitle.setText("")
+
                 DynamicToast.makeSuccess(requireContext(), getString(R.string.dynamic_toast_added))
                     .show()
             }
