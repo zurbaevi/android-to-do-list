@@ -5,24 +5,26 @@ buildscript {
         room_version = "2.3.0"
         coroutines = "1.5.0"
         lifecycle_version = "2.3.1"
-        getbaseFabVersion = "1.10.1"
-        dynamicToastVersion = "4.1.0"
-        recyclerViewSwipeDecoratorVersion = "1.2.3"
-        coreKtxVersion = "1.6.0"
-        appcompatVersion = "1.3.1"
-        materialVersion = "1.4.0"
-        constraintLayoutVersion = "2.1.0"
-        junitVersion = "4.13.2"
-        testJunitVersion = "1.1.3"
-        espressoVersion = "3.4.0"
+        getbase_fab_version = "1.10.1"
+        dynamic_toast_version = "4.1.0"
+        recycler_view_swipe_decorator_version = "1.2.3"
+        core_ktx_version = "1.6.0"
+        appcompat_version = "1.3.1"
+        material_version = "1.4.0"
+        constraint_layout_version = "2.1.0"
+        junit_version = "4.13.2"
+        test_junit_version = "1.1.3"
+        espresso_version = "3.4.0"
+        build_gradle_version = "7.0.2"
+        kotlin_gradle_plugin_version = "1.5.30"
     }
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.2"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
+        classpath "com.android.tools.build:gradle:$build_gradle_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_gradle_plugin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

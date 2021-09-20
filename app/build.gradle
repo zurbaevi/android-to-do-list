@@ -39,14 +39,13 @@ android {
 }
 
 dependencies {
-
-    implementation "androidx.core:core-ktx:$coreKtxVersion"
-    implementation "androidx.appcompat:appcompat:$appcompatVersion"
-    implementation "com.google.android.material:material:$materialVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
-    testImplementation "junit:junit:$junitVersion"
-    androidTestImplementation "androidx.test.ext:junit:$testJunitVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    implementation "androidx.core:core-ktx:$core_ktx_version"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$test_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 
     // Navigation Component
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
@@ -57,11 +56,11 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
 
     // Floating action button
-    implementation "com.getbase:floatingactionbutton:$getbaseFabVersion"
+    implementation "com.getbase:floatingactionbutton:$getbase_fab_version"
 
     // Dynamic toasts
-    implementation "com.pranavpandey.android:dynamic-toasts:$dynamicToastVersion"
+    implementation "com.pranavpandey.android:dynamic-toasts:$dynamic_toast_version"
 
     // RecyclerView swipe decorator
-    implementation "it.xabaras.android:recyclerview-swipedecorator:$recyclerViewSwipeDecoratorVersion"
+    implementation "it.xabaras.android:recyclerview-swipedecorator:$recycler_view_swipe_decorator_version"
 }
