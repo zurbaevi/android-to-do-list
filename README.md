@@ -8,7 +8,7 @@ ____
 
 ## Скриншоты:
 
-| <img src="pictures/device_screen_4.png"> | <img src="pictures/device_screen_2.png"> | <img src="pictures/device_screen_1.png"> |
+| <img src="pictures/device_screen_1.png"> | <img src="pictures/device_screen_2.png"> | <img src="pictures/device_screen_3.png"> |
 | ---------------------------------------------- | -------------------------------------------- | ------------------------------------------- | 
 
 ____
@@ -20,6 +20,7 @@ ____
 - Navigation Component
 - Room
 - Coroutine
+- Hilt
 
 ____
 
