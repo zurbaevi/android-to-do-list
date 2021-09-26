@@ -1,12 +1,12 @@
-package dev.zurbaevi.todolist.service.repository
+package dev.zurbaevi.todolist.data.repository
 
-import androidx.lifecycle.LiveData
-import dev.zurbaevi.todolist.model.TaskEntry
-import dev.zurbaevi.todolist.service.repository.local.TaskDao
+import dev.zurbaevi.todolist.data.local.TaskDao
+import dev.zurbaevi.todolist.data.model.TaskEntry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class TaskRepository(private val taskDao: TaskDao) {
+class TaskRepository @Inject constructor(private val taskDao: TaskDao) {
 
     suspend fun insert(taskEntry: TaskEntry) {
         withContext(Dispatchers.IO) {
@@ -38,8 +38,8 @@ class TaskRepository(private val taskDao: TaskDao) {
         }
     }
 
-    fun getAllTasks(): LiveData<List<TaskEntry>> = taskDao.getAllTasks()
+    fun getAllTasks() = taskDao.getAllTasks()
 
-    fun getAllTasksCount(): LiveData<Int> = taskDao.getAllTasksCount()
+    fun getAllTasksCount() = taskDao.getAllTasksCount()
 
 }

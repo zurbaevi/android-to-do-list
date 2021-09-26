@@ -38,7 +38,7 @@
             android:importantForAutofill="no"
             android:inputType="text"
             android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/gray"
             android:textSize="18sp"
             tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
@@ -53,7 +53,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@color/blue_gray_900"
+            android:background="@drawable/rounded_button"
             android:fontFamily="@font/didact_gothic"
             android:text="@string/fragment_add_update"
             android:textColor="@color/white"

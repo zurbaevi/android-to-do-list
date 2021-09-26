@@ -1,13 +1,13 @@
-package dev.zurbaevi.todolist.view.adapter
+package dev.zurbaevi.todolist.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import dev.zurbaevi.todolist.data.model.TaskEntry
 import dev.zurbaevi.todolist.databinding.RowLayoutBinding
-import dev.zurbaevi.todolist.model.TaskEntry
-import dev.zurbaevi.todolist.view.listener.OnItemClickListener
+import dev.zurbaevi.todolist.ui.listener.OnItemClickListener
 import java.text.DateFormat
 
 class TaskAdapter(private var clickListener: OnItemClickListener) :

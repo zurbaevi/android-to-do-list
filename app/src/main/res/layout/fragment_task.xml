@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.TaskFragment">
+    tools:context=".ui.view.fragment.TaskFragment">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -18,7 +18,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:background="@color/blue_gray_800">
+            android:background="@color/blue_gray_900">
 
             <TextView
                 android:id="@+id/textTodayTitle"
@@ -27,7 +27,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="34dp"
-                android:layout_marginTop="34dp"
+                android:layout_marginTop="24dp"
                 android:fontFamily="@font/didact_gothic"
                 android:textColor="@color/white"
                 android:textSize="25sp"
@@ -87,8 +87,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="28dp"
-        app:fab_addButtonColorNormal="@color/blue_gray_800"
-        app:fab_addButtonColorPressed="@color/blue_gray_900"
+        app:fab_addButtonColorNormal="@color/blue_gray_900"
+        app:fab_addButtonColorPressed="@color/blue_gray_800"
         app:fab_expandDirection="up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -97,8 +97,8 @@
             android:id="@+id/fabExpandMenuButtonDeleteTasks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/blue_gray_800"
-            app:fab_colorPressed="@color/blue_gray_900"
+            app:fab_colorNormal="@color/blue_gray_900"
+            app:fab_colorPressed="@color/blue_gray_800"
             app:fab_icon="@drawable/ic_delete"
             app:fab_size="normal" />
 
@@ -106,8 +106,8 @@
             android:id="@+id/fabExpandMenuButtonDeleteCompletedTasks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/blue_gray_800"
-            app:fab_colorPressed="@color/blue_gray_900"
+            app:fab_colorNormal="@color/blue_gray_900"
+            app:fab_colorPressed="@color/blue_gray_800"
             app:fab_icon="@drawable/ic_remove_done"
             app:fab_size="normal" />
 
@@ -115,8 +115,8 @@
             android:id="@+id/fabExpandMenuButtonAddTask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_colorNormal="@color/blue_gray_800"
-            app:fab_colorPressed="@color/blue_gray_900"
+            app:fab_colorNormal="@color/blue_gray_900"
+            app:fab_colorPressed="@color/blue_gray_800"
             app:fab_icon="@drawable/ic_add_task"
             app:fab_size="normal" />
 

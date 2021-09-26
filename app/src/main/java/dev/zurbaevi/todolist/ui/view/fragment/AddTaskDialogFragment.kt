@@ -1,4 +1,4 @@
-package dev.zurbaevi.todolist.view.fragment
+package dev.zurbaevi.todolist.ui.view.fragment
 
 import android.app.Dialog
 import android.os.Bundle
@@ -11,26 +11,25 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
+import dagger.hilt.android.AndroidEntryPoint
 import dev.zurbaevi.todolist.R
-import dev.zurbaevi.todolist.databinding.FragmentAddTaskBottomSheetDialogBinding
-import dev.zurbaevi.todolist.model.TaskEntry
-import dev.zurbaevi.todolist.viewmodel.TaskViewModel
-import dev.zurbaevi.todolist.viewmodel.TaskViewModelProviderFactory
+import dev.zurbaevi.todolist.data.model.TaskEntry
+import dev.zurbaevi.todolist.databinding.FragmentAddTaskDialogBinding
+import dev.zurbaevi.todolist.ui.viewmodel.TaskViewModel
 
-class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
+@AndroidEntryPoint
+class AddTaskDialogFragment : BottomSheetDialogFragment() {
 
-    private var _binding: FragmentAddTaskBottomSheetDialogBinding? = null
+    private var _binding: FragmentAddTaskDialogBinding? = null
     private val binding get() = _binding!!
 
-    private val taskViewModel: TaskViewModel by viewModels {
-        TaskViewModelProviderFactory.getInstance(requireContext())
-    }
+    private val taskViewModel: TaskViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentAddTaskBottomSheetDialogBinding.inflate(inflater, container, false)
+        _binding = FragmentAddTaskDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -56,10 +55,12 @@ class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
                     )
                 )
 
-                binding.editAddTitle.setText("")
+                DynamicToast.makeSuccess(
+                    requireContext(),
+                    getString(R.string.dynamic_toast_added)
+                ).show()
 
-                DynamicToast.makeSuccess(requireContext(), getString(R.string.dynamic_toast_added))
-                    .show()
+                dialog?.dismiss()
             }
         }
     }
@@ -74,4 +75,5 @@ class AddTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

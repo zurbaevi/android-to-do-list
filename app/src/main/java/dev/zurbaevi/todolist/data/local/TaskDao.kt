@@ -1,13 +1,13 @@
-package dev.zurbaevi.todolist.service.repository.local
+package dev.zurbaevi.todolist.data.local
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import dev.zurbaevi.todolist.model.TaskEntry
+import dev.zurbaevi.todolist.data.model.TaskEntry
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TaskDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(taskEntry: TaskEntry)
 
     @Update
@@ -23,9 +23,9 @@ interface TaskDao {
     suspend fun deleteCompletedTasks()
 
     @Query("SELECT * FROM task_table ORDER BY timestamp DESC")
-    fun getAllTasks(): LiveData<List<TaskEntry>>
+    fun getAllTasks(): Flow<List<TaskEntry>>
 
     @Query("SELECT COUNT(*) FROM task_table WHERE completed LIKE 0")
-    fun getAllTasksCount(): LiveData<Int>
+    fun getAllTasksCount(): Flow<Int>
 
 }

@@ -1,6 +1,6 @@
-package dev.zurbaevi.todolist.view.listener
+package dev.zurbaevi.todolist.ui.listener
 
-import dev.zurbaevi.todolist.model.TaskEntry
+import dev.zurbaevi.todolist.data.model.TaskEntry
 
 interface OnItemClickListener {
 

@@ -1,4 +1,4 @@
-package dev.zurbaevi.todolist.view.fragment
+package dev.zurbaevi.todolist.ui.view.fragment
 
 import android.app.Dialog
 import android.os.Bundle
@@ -11,33 +11,32 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
+import dagger.hilt.android.AndroidEntryPoint
 import dev.zurbaevi.todolist.R
-import dev.zurbaevi.todolist.databinding.FragmentUpdateTaskBottomSheetDialogBinding
-import dev.zurbaevi.todolist.model.TaskEntry
-import dev.zurbaevi.todolist.viewmodel.TaskViewModel
-import dev.zurbaevi.todolist.viewmodel.TaskViewModelProviderFactory
+import dev.zurbaevi.todolist.data.model.TaskEntry
+import dev.zurbaevi.todolist.databinding.FragmentUpdateTaskDialogBinding
+import dev.zurbaevi.todolist.ui.viewmodel.TaskViewModel
 
-class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
+@AndroidEntryPoint
+class UpdateTaskDialogFragment : BottomSheetDialogFragment() {
 
-    private var _binding: FragmentUpdateTaskBottomSheetDialogBinding? = null
+    private var _binding: FragmentUpdateTaskDialogBinding? = null
     private val binding get() = _binding!!
 
-    private val taskViewModel: TaskViewModel by viewModels {
-        TaskViewModelProviderFactory.getInstance(requireContext())
-    }
+    private val taskViewModel: TaskViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentUpdateTaskBottomSheetDialogBinding.inflate(inflater, container, false)
+        _binding = FragmentUpdateTaskDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val args = UpdateTaskBottomSheetDialogFragmentArgs.fromBundle(requireArguments())
+        val args = UpdateTaskDialogFragmentArgs.fromBundle(requireArguments())
 
         binding.apply {
             editUpdateTask.setText(args.taskEntry.title)
@@ -64,8 +63,9 @@ class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
                     requireContext(),
                     getString(R.string.dynamic_toast_updated)
                 ).show()
-            }
 
+                dialog?.dismiss()
+            }
         }
     }
 
@@ -79,4 +79,5 @@ class UpdateTaskBottomSheetDialogFragment : BottomSheetDialogFragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

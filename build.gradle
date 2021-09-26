@@ -17,6 +17,8 @@ buildscript {
         espresso_version = "3.4.0"
         build_gradle_version = "7.0.2"
         kotlin_gradle_plugin_version = "1.5.30"
+        hilt_version = "2.38.1"
+        material_dialogs = "3.3.0"
     }
     repositories {
         google()
@@ -26,6 +28,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$build_gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_gradle_plugin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

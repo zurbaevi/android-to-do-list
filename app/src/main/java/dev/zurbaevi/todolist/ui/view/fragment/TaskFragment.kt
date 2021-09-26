@@ -1,4 +1,4 @@
-package dev.zurbaevi.todolist.view.fragment
+package dev.zurbaevi.todolist.ui.view.fragment
 
 import android.graphics.Canvas
 import android.graphics.Color
@@ -11,29 +11,28 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.afollestad.materialdialogs.MaterialDialog
 import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
+import dagger.hilt.android.AndroidEntryPoint
 import dev.zurbaevi.todolist.R
+import dev.zurbaevi.todolist.data.model.TaskEntry
 import dev.zurbaevi.todolist.databinding.FragmentTaskBinding
-import dev.zurbaevi.todolist.model.TaskEntry
-import dev.zurbaevi.todolist.util.alertCompletedTasksDialog
-import dev.zurbaevi.todolist.util.alertDeleteAllTasksDialog
-import dev.zurbaevi.todolist.util.getCurrentDate
+import dev.zurbaevi.todolist.ui.adapter.TaskAdapter
+import dev.zurbaevi.todolist.ui.listener.OnItemClickListener
+import dev.zurbaevi.todolist.ui.viewmodel.TaskViewModel
 import dev.zurbaevi.todolist.util.safeNavigate
-import dev.zurbaevi.todolist.view.adapter.TaskAdapter
-import dev.zurbaevi.todolist.view.listener.OnItemClickListener
-import dev.zurbaevi.todolist.viewmodel.TaskViewModel
-import dev.zurbaevi.todolist.viewmodel.TaskViewModelProviderFactory
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
+import java.text.SimpleDateFormat
+import java.util.*
 
+@AndroidEntryPoint
 class TaskFragment : Fragment(), OnItemClickListener {
 
     private var _binding: FragmentTaskBinding? = null
     private val binding get() = _binding!!
 
-    private val taskViewModel: TaskViewModel by viewModels {
-        TaskViewModelProviderFactory.getInstance(requireContext())
-    }
+    private val taskViewModel: TaskViewModel by viewModels()
 
     private var adapter: TaskAdapter = TaskAdapter(this)
 
@@ -53,7 +52,10 @@ class TaskFragment : Fragment(), OnItemClickListener {
 
         binding.apply {
 
-            textTodayTitle.text = getCurrentDate()
+            textTodayTitle.text = SimpleDateFormat(
+                "EEE, MMM d, yy",
+                Locale.ENGLISH
+            ).format(Calendar.getInstance().time)
 
             recyclerView.adapter = adapter
 
@@ -65,12 +67,34 @@ class TaskFragment : Fragment(), OnItemClickListener {
                         floatingActionsMenu.collapse()
                     }
                     fabExpandMenuButtonDeleteTasks.setOnClickListener {
-                        alertDeleteAllTasksDialog(requireContext()) { taskViewModel.deleteAllTasks() }
+                        MaterialDialog(requireContext()).show {
+                            title(R.string.alert_dialog_title)
+                            message(R.string.alert_dialog_message)
+                            positiveButton {
+                                taskViewModel.deleteAllTasks()
+                                DynamicToast.makeSuccess(
+                                    context,
+                                    context.getString(R.string.dynamic_toast_deleted)
+                                ).show()
+                            }
+                            negativeButton { dismiss() }
+                        }
                         floatingActionsMenu.collapse()
                     }
 
                     fabExpandMenuButtonDeleteCompletedTasks.setOnClickListener {
-                        alertCompletedTasksDialog(requireContext()) { taskViewModel.deleteCompletedTasks() }
+                        MaterialDialog(requireContext()).show {
+                            title(R.string.alert_dialog_completed_title)
+                            message(R.string.alert_dialog_completed_message)
+                            positiveButton {
+                                taskViewModel.deleteCompletedTasks()
+                                DynamicToast.makeSuccess(
+                                    context,
+                                    context.getString(R.string.dynamic_toast_deleted)
+                                ).show()
+                            }
+                            negativeButton { dismiss() }
+                        }
                         floatingActionsMenu.collapse()
                     }
                 }
@@ -93,6 +117,7 @@ class TaskFragment : Fragment(), OnItemClickListener {
             }
         })
 
+
         taskViewModel.getAllTasksCount.observe(viewLifecycleOwner, {
             binding.textTaskCount.text = String.format("$it %s", getString(R.string.tasks))
         })
@@ -112,11 +137,21 @@ class TaskFragment : Fragment(), OnItemClickListener {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val taskEntry = adapter.currentList[position]
-                taskViewModel.delete(taskEntry)
-                DynamicToast.makeSuccess(
-                    requireContext(),
-                    getString(R.string.dynamic_toast_deleted)
-                ).show()
+                MaterialDialog(requireContext()).show {
+                    title(R.string.alert_dialog_task_title)
+                    message(R.string.alert_dialog_task_message)
+                    positiveButton {
+                        taskViewModel.delete(taskEntry)
+                        DynamicToast.makeSuccess(
+                            context,
+                            context.getString(R.string.dynamic_toast_deleted)
+                        ).show()
+                    }
+                    negativeButton {
+                        adapter.notifyItemChanged(position)
+                        dismiss()
+                    }
+                }
             }
 
             override fun onChildDraw(
@@ -171,4 +206,5 @@ class TaskFragment : Fragment(), OnItemClickListener {
         super.onDestroyView()
         _binding = null
     }
+
 }

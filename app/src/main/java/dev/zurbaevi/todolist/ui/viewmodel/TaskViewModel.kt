@@ -1,15 +1,19 @@
-package dev.zurbaevi.todolist.viewmodel
+package dev.zurbaevi.todolist.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import dev.zurbaevi.todolist.model.TaskEntry
-import dev.zurbaevi.todolist.service.repository.TaskRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.zurbaevi.todolist.data.model.TaskEntry
+import dev.zurbaevi.todolist.data.repository.TaskRepository
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
+@HiltViewModel
+class TaskViewModel @Inject constructor(private val taskRepository: TaskRepository) : ViewModel() {
 
-    val getAllTasks = taskRepository.getAllTasks()
-    val getAllTasksCount = taskRepository.getAllTasksCount()
+    val getAllTasks = taskRepository.getAllTasks().asLiveData()
+    val getAllTasksCount = taskRepository.getAllTasksCount().asLiveData()
 
     fun insert(taskEntry: TaskEntry) {
         viewModelScope.launch {
@@ -40,4 +44,5 @@ class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
             taskRepository.deleteCompletedTasks()
         }
     }
+
 }

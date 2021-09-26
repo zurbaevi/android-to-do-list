@@ -1,4 +1,4 @@
-package dev.zurbaevi.todolist.service
+package dev.zurbaevi.todolist.data
 
 object Constants {
 
