@@ -20,6 +20,7 @@ buildscript {
         hilt_version = "2.38.1"
         material_dialogs = "3.3.0"
         lifecycle_version = "2.3.1"
+        view_binding_property_delegate_version = "1.5.0-beta01"
     }
     repositories {
         google()
