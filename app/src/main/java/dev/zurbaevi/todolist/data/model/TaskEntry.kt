@@ -9,11 +9,9 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = DATABASE_TABLE_NAME)
 data class TaskEntry(
-
     @PrimaryKey(autoGenerate = true)
     var id: Int,
     var title: String,
     var timestamp: Long,
     var completed: Boolean,
-
-    ) : Parcelable
+) : Parcelable
