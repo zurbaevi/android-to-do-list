@@ -19,7 +19,6 @@ import dev.zurbaevi.todolist.R
 import dev.zurbaevi.todolist.data.model.TaskEntry
 import dev.zurbaevi.todolist.databinding.FragmentTaskBinding
 import dev.zurbaevi.todolist.ui.adapter.TaskAdapter
-import dev.zurbaevi.todolist.ui.listener.OnItemClickListener
 import dev.zurbaevi.todolist.ui.viewmodel.TaskViewModel
 import dev.zurbaevi.todolist.util.safeNavigate
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
@@ -27,7 +26,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class TaskFragment : Fragment(R.layout.fragment_task), OnItemClickListener {
+class TaskFragment : Fragment(R.layout.fragment_task), TaskAdapter.OnItemClickListener {
 
     private var _binding: FragmentTaskBinding? = null
     private val binding get() = _binding!!

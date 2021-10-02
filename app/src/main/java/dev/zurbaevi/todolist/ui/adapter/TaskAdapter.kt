@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dev.zurbaevi.todolist.data.model.TaskEntry
 import dev.zurbaevi.todolist.databinding.RowLayoutBinding
-import dev.zurbaevi.todolist.ui.listener.OnItemClickListener
 import java.text.DateFormat
 
 class TaskAdapter(private var clickListener: OnItemClickListener) :
@@ -25,6 +24,11 @@ class TaskAdapter(private var clickListener: OnItemClickListener) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding(getItem(position))
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(taskEntry: TaskEntry)
+        fun onCheckBoxClick(taskEntry: TaskEntry, isChecked: Boolean)
     }
 
     object TaskDiffCallback : DiffUtil.ItemCallback<TaskEntry>() {
