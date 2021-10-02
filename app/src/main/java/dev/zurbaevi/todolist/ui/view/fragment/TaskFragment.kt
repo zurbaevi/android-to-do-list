@@ -3,13 +3,14 @@ package dev.zurbaevi.todolist.ui.view.fragment
 import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.afollestad.materialdialogs.MaterialDialog
 import com.getbase.floatingactionbutton.FloatingActionsMenu
 import com.pranavpandey.android.dynamic.toasts.DynamicToast
@@ -28,11 +29,20 @@ import java.util.*
 @AndroidEntryPoint
 class TaskFragment : Fragment(R.layout.fragment_task), OnItemClickListener {
 
-    private val binding: FragmentTaskBinding by viewBinding()
+    private var _binding: FragmentTaskBinding? = null
+    private val binding get() = _binding!!
 
     private val taskViewModel: TaskViewModel by viewModels()
 
     private var adapter: TaskAdapter = TaskAdapter(this)
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        _binding = FragmentTaskBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

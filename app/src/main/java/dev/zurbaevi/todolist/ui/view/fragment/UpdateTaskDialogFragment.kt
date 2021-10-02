@@ -27,7 +27,7 @@ class UpdateTaskDialogFragment : BottomSheetDialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentUpdateTaskDialogBinding.inflate(inflater, container, false)
         return binding.root
