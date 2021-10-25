@@ -20,7 +20,7 @@ ____
 - Navigation Component
 - Room
 - Coroutine
-- Hilt
+- Koin
 
 ____
 
