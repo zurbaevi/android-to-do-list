@@ -7,14 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.getbase.floatingactionbutton.FloatingActionsMenu
-import com.pranavpandey.android.dynamic.toasts.DynamicToast
-import dagger.hilt.android.AndroidEntryPoint
 import dev.zurbaevi.todolist.R
 import dev.zurbaevi.todolist.data.model.TaskEntry
 import dev.zurbaevi.todolist.databinding.FragmentTaskBinding
@@ -22,17 +19,16 @@ import dev.zurbaevi.todolist.ui.adapter.TaskAdapter
 import dev.zurbaevi.todolist.ui.viewmodel.TaskViewModel
 import dev.zurbaevi.todolist.util.safeNavigate
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-@AndroidEntryPoint
-class TaskFragment : Fragment(R.layout.fragment_task), TaskAdapter.OnItemClickListener {
+class TaskFragment : Fragment(), TaskAdapter.OnItemClickListener {
 
     private var _binding: FragmentTaskBinding? = null
     private val binding get() = _binding!!
 
-    private val taskViewModel: TaskViewModel by viewModels()
-
+    private val taskViewModel: TaskViewModel by viewModel()
     private var adapter: TaskAdapter = TaskAdapter(this)
 
     override fun onCreateView(
@@ -71,10 +67,6 @@ class TaskFragment : Fragment(R.layout.fragment_task), TaskAdapter.OnItemClickLi
                             message(R.string.alert_dialog_message)
                             positiveButton {
                                 taskViewModel.deleteAllTasks()
-                                DynamicToast.makeSuccess(
-                                    context,
-                                    context.getString(R.string.dynamic_toast_deleted)
-                                ).show()
                             }
                             negativeButton { dismiss() }
                         }
@@ -87,10 +79,6 @@ class TaskFragment : Fragment(R.layout.fragment_task), TaskAdapter.OnItemClickLi
                             message(R.string.alert_dialog_completed_message)
                             positiveButton {
                                 taskViewModel.deleteCompletedTasks()
-                                DynamicToast.makeSuccess(
-                                    context,
-                                    context.getString(R.string.dynamic_toast_deleted)
-                                ).show()
                             }
                             negativeButton { dismiss() }
                         }
@@ -141,10 +129,6 @@ class TaskFragment : Fragment(R.layout.fragment_task), TaskAdapter.OnItemClickLi
                     message(R.string.alert_dialog_task_message)
                     positiveButton {
                         taskViewModel.delete(taskEntry)
-                        DynamicToast.makeSuccess(
-                            context,
-                            context.getString(R.string.dynamic_toast_deleted)
-                        ).show()
                     }
                     negativeButton {
                         adapter.notifyItemChanged(position)
@@ -199,6 +183,11 @@ class TaskFragment : Fragment(R.layout.fragment_task), TaskAdapter.OnItemClickLi
 
     override fun onCheckBoxClick(taskEntry: TaskEntry, isChecked: Boolean) {
         taskViewModel.update(taskEntry, isChecked)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

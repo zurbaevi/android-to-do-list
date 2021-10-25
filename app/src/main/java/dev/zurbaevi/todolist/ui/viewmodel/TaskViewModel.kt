@@ -3,14 +3,11 @@ package dev.zurbaevi.todolist.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.zurbaevi.todolist.data.model.TaskEntry
 import dev.zurbaevi.todolist.data.repository.TaskRepository
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class TaskViewModel @Inject constructor(private val taskRepository: TaskRepository) : ViewModel() {
+class TaskViewModel(private val taskRepository: TaskRepository) : ViewModel() {
 
     val getAllTasks = taskRepository.getAllTasks().asLiveData()
     val getAllTasksCount = taskRepository.getAllTasksCount().asLiveData()

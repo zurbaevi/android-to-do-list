@@ -4,11 +4,8 @@ import dev.zurbaevi.todolist.data.local.TaskDao
 import dev.zurbaevi.todolist.data.model.TaskEntry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class TaskRepository @Inject constructor(private val taskDao: TaskDao) {
+class TaskRepository(private val taskDao: TaskDao) {
 
     suspend fun insert(taskEntry: TaskEntry) {
         withContext(Dispatchers.IO) {

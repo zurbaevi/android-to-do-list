@@ -4,7 +4,6 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -65,20 +64,13 @@ dependencies {
     // Floating action button
     implementation "com.getbase:floatingactionbutton:$getbase_fab_version"
 
-    // Dynamic toasts
-    implementation "com.pranavpandey.android:dynamic-toasts:$dynamic_toast_version"
-
     // RecyclerView swipe decorator
     implementation "it.xabaras.android:recyclerview-swipedecorator:$recycler_view_swipe_decorator_version"
 
-    // Hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    // Koin
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-android-viewmodel:$koin_version"
 
     // Material dialogs
     implementation "com.afollestad.material-dialogs:core:$material_dialogs"
-}
-
-kapt {
-    correctErrorTypes true
 }

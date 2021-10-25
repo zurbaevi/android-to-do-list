@@ -6,24 +6,22 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.pranavpandey.android.dynamic.toasts.DynamicToast
-import dagger.hilt.android.AndroidEntryPoint
 import dev.zurbaevi.todolist.R
 import dev.zurbaevi.todolist.data.model.TaskEntry
 import dev.zurbaevi.todolist.databinding.FragmentAddTaskDialogBinding
 import dev.zurbaevi.todolist.ui.viewmodel.TaskViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class AddTaskDialogFragment : BottomSheetDialogFragment() {
 
     private var _binding: FragmentAddTaskDialogBinding? = null
     private val binding get() = _binding!!
 
-    private val taskViewModel: TaskViewModel by viewModels()
+    private val taskViewModel: TaskViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +37,10 @@ class AddTaskDialogFragment : BottomSheetDialogFragment() {
         binding.apply {
             buttonAddTask.setOnClickListener {
                 if (TextUtils.isEmpty(editAddTitle.text)) {
-                    DynamicToast.makeWarning(
+                    Toast.makeText(
                         requireContext(),
-                        getString(R.string.dynamic_toast_empty)
+                        R.string.toast_empty,
+                        Toast.LENGTH_LONG
                     ).show()
                     return@setOnClickListener
                 }
@@ -54,11 +53,6 @@ class AddTaskDialogFragment : BottomSheetDialogFragment() {
                         false
                     )
                 )
-
-                DynamicToast.makeSuccess(
-                    requireContext(),
-                    getString(R.string.dynamic_toast_added)
-                ).show()
 
                 dialog?.dismiss()
             }

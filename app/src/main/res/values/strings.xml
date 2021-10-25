@@ -21,8 +21,5 @@
     <string name="alert_dialog_completed_message">Are you, sure you want to delete completed tasks?</string>
     <string name="alert_dialog_task_message">Are you, sure you want to delete task?</string>
     <string name="content_description_logo">Logo</string>
-    <string name="dynamic_toast_deleted">Successful deleted</string>
-    <string name="dynamic_toast_added">Successful added</string>
-    <string name="dynamic_toast_updated">Successful updated</string>
-    <string name="dynamic_toast_empty">You haven\'t entered anything</string>
+    <string name="toast_empty">You haven\'t entered anything</string>
 </resources>

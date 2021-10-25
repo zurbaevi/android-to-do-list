@@ -25,11 +25,6 @@
         android:id="@+id/updateTaskBottomSheetDialogFragment"
         android:name="dev.zurbaevi.todolist.ui.view.fragment.UpdateTaskDialogFragment"
         tools:layout="@layout/fragment_update_task_dialog">
-        <action
-            android:id="@+id/action_updateTaskBottomSheetDialogFragment_to_taskFragment"
-            app:destination="@id/taskFragment"
-            app:popUpTo="@id/taskFragment"
-            app:popUpToInclusive="true" />
         <argument
             android:name="taskEntry"
             app:argType="dev.zurbaevi.todolist.data.model.TaskEntry" />
