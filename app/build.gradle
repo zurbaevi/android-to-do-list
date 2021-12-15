@@ -69,7 +69,6 @@ dependencies {
 
     // Koin
     implementation "io.insert-koin:koin-android:$koin_version"
-    implementation "io.insert-koin:koin-android-viewmodel:$koin_version"
 
     // Material dialogs
     implementation "com.afollestad.material-dialogs:core:$material_dialogs"

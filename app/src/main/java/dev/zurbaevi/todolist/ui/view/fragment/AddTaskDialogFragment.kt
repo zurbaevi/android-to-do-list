@@ -14,7 +14,7 @@ import dev.zurbaevi.todolist.R
 import dev.zurbaevi.todolist.data.model.TaskEntry
 import dev.zurbaevi.todolist.databinding.FragmentAddTaskDialogBinding
 import dev.zurbaevi.todolist.ui.viewmodel.TaskViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddTaskDialogFragment : BottomSheetDialogFragment() {
 

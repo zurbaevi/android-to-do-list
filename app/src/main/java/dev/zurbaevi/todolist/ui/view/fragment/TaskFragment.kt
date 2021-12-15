@@ -19,7 +19,7 @@ import dev.zurbaevi.todolist.ui.adapter.TaskAdapter
 import dev.zurbaevi.todolist.ui.viewmodel.TaskViewModel
 import dev.zurbaevi.todolist.util.safeNavigate
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
